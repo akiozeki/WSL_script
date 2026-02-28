@@ -1,0 +1,3205 @@
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Set Time : 2024-12-01 00:00:00----2025-02-28 18:00:00 dh=6
+time: 2024-12-01_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-27 12:00:00
+to 2024-12-04 12:00:00
+Traceback (most recent call last):
+  File "/home/akioz/script/wrf/egr/mmean_egr.py", line 118, in <module>
+    theta2_w=interplevel(theta2,p2,p_w)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/metadecorators.py", line 1730, in func_wrapper
+    return _set_horiz_meta(wrapped, instance, args, kwargs)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/metadecorators.py", line 801, in _set_horiz_meta
+    result = wrapped(*args, **kwargs)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/interp.py", line 109, in interplevel
+    result = _interpz3d(field3d, vert, _desiredlev, missing)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/specialdec.py", line 689, in func_wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/specialdec.py", line 586, in func_wrapper
+    _ = wrapped(*new_args, **new_kwargs)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/decorators.py", line 292, in func_wrapper
+    new_args = [arg.astype(alg_dtype)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/decorators.py", line 292, in <listcomp>
+    new_args = [arg.astype(alg_dtype)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/core/common.py", line 1484, in astype
+    return apply_ufunc(
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py", line 1263, in apply_ufunc
+    return apply_dataarray_vfunc(
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py", line 305, in apply_dataarray_vfunc
+    result_var = func(*data_vars)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py", line 814, in apply_variable_ufunc
+    result_data = func(*input_data)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/core/duck_array_ops.py", line 246, in astype
+    return data.astype(dtype, **kwargs)
+KeyboardInterrupt
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Set Time : 2024-12-01 00:00:00----2025-02-28 18:00:00 dh=6
+time: 2024-12-01_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-27 12:00:00
+to 2024-12-04 12:00:00
+Traceback (most recent call last):
+  File "/home/akioz/script/wrf/egr/mmean_egr.py", line 124, in <module>
+    z2=getvar(moving_list2,"z",timeidx=ALL_TIMES,method="join",units="m")
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/routines.py", line 356, in getvar
+    return _FUNC_MAP[actual_var](wrfin, timeidx, method, squeeze, cache,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/metadecorators.py", line 722, in func_wrapper
+    result = wrapped(*new_args)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/decorators.py", line 46, in func_wrapper
+    return do_conversion(wrapped(*args, **kwargs), unit_type,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/g_geoht.py", line 257, in get_height
+    return _get_geoht(wrfin, timeidx, method, squeeze, cache, meta, _key,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/g_geoht.py", line 87, in _get_geoht
+    ph_vars = extract_vars(wrfin, timeidx, ("PH", "PHB", "HGT"),
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/util.py", line 2290, in extract_vars
+    return {var: _extract_var(wrfin, var, timeidx, None,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/util.py", line 2290, in <dictcomp>
+    return {var: _extract_var(wrfin, var, timeidx, None,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/util.py", line 2227, in _extract_var
+    return combine_files(wrfin, varname, timeidx, is_moving,
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/util.py", line 2132, in combine_files
+    outarr = _join_files(wrfseq, varname, timeidx, is_moving, meta, _key)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/util.py", line 1886, in _join_files
+    outdata = np.full(outdims, default_fill(first_var.dtype), first_var.dtype)
+  File "/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/numpy/core/numeric.py", line 329, in full
+    a = empty(shape, dtype, order)
+KeyboardInterrupt
+Command terminated by signal 2
+7.32user 2.22system 0:11.20elapsed 85%CPU (0avgtext+0avgdata 2660184maxresident)k
+1821688inputs+32outputs (1198major+960398minor)pagefaults 0swaps
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Set Time : 2024-12-01 00:00:00----2025-02-28 18:00:00 dh=6
+time: 2024-12-01_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-27 12:00:00
+to 2024-12-04 12:00:00
+Ushear1 Space Mean =  0.0036638603
+Ushear2 Space Mean =  0.0035539744
+Change_Time_Step
+
+time: 2024-12-01_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-27 18:00:00
+to 2024-12-04 18:00:00
+Ushear1 Space Mean =  0.0036897827
+Ushear2 Space Mean =  0.0035827237
+Change_Time_Step
+
+time: 2024-12-01_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-28 00:00:00
+to 2024-12-05 00:00:00
+Ushear1 Space Mean =  0.0037235094
+Ushear2 Space Mean =  0.0036281121
+Change_Time_Step
+
+time: 2024-12-01_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-28 06:00:00
+to 2024-12-05 06:00:00
+Ushear1 Space Mean =  0.0037778362
+Ushear2 Space Mean =  0.003684931
+Change_Time_Step
+
+time: 2024-12-02_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-28 12:00:00
+to 2024-12-05 12:00:00
+Ushear1 Space Mean =  0.0038323884
+Ushear2 Space Mean =  0.0037414064
+Change_Time_Step
+
+time: 2024-12-02_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-28 18:00:00
+to 2024-12-05 18:00:00
+Ushear1 Space Mean =  0.0038975438
+Ushear2 Space Mean =  0.003821374
+Change_Time_Step
+
+time: 2024-12-02_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-29 00:00:00
+to 2024-12-06 00:00:00
+Ushear1 Space Mean =  0.0039560595
+Ushear2 Space Mean =  0.0038937521
+Change_Time_Step
+
+time: 2024-12-02_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-29 06:00:00
+to 2024-12-06 06:00:00
+Ushear1 Space Mean =  0.0040273257
+Ushear2 Space Mean =  0.003972253
+Change_Time_Step
+
+time: 2024-12-03_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-29 12:00:00
+to 2024-12-06 12:00:00
+Ushear1 Space Mean =  0.0040997965
+Ushear2 Space Mean =  0.004050255
+Change_Time_Step
+
+time: 2024-12-03_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-29 18:00:00
+to 2024-12-06 18:00:00
+Ushear1 Space Mean =  0.0041678185
+Ushear2 Space Mean =  0.004110532
+Change_Time_Step
+
+time: 2024-12-03_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-30 00:00:00
+to 2024-12-07 00:00:00
+Ushear1 Space Mean =  0.004236712
+Ushear2 Space Mean =  0.0041723214
+Change_Time_Step
+
+time: 2024-12-03_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-30 06:00:00
+to 2024-12-07 06:00:00
+Ushear1 Space Mean =  0.0042772596
+Ushear2 Space Mean =  0.004223204
+Change_Time_Step
+
+time: 2024-12-04_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-30 12:00:00
+to 2024-12-07 12:00:00
+Ushear1 Space Mean =  0.0043318965
+Ushear2 Space Mean =  0.004262465
+Change_Time_Step
+
+time: 2024-12-04_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-11-30 18:00:00
+to 2024-12-07 18:00:00
+Ushear1 Space Mean =  0.004376947
+Ushear2 Space Mean =  0.004296855
+Change_Time_Step
+
+time: 2024-12-04_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-01 00:00:00
+to 2024-12-08 00:00:00
+Ushear1 Space Mean =  0.0043936893
+Ushear2 Space Mean =  0.0043112924
+Change_Time_Step
+
+time: 2024-12-04_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-01 06:00:00
+to 2024-12-08 06:00:00
+Ushear1 Space Mean =  0.0043874257
+Ushear2 Space Mean =  0.004301989
+Change_Time_Step
+
+time: 2024-12-05_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-01 12:00:00
+to 2024-12-08 12:00:00
+Ushear1 Space Mean =  0.004346918
+Ushear2 Space Mean =  0.0042616134
+Change_Time_Step
+
+time: 2024-12-05_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-01 18:00:00
+to 2024-12-08 18:00:00
+Ushear1 Space Mean =  0.004308363
+Ushear2 Space Mean =  0.0042223465
+Change_Time_Step
+
+time: 2024-12-05_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-02 00:00:00
+to 2024-12-09 00:00:00
+Ushear1 Space Mean =  0.0042566336
+Ushear2 Space Mean =  0.004169588
+Change_Time_Step
+
+time: 2024-12-05_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-02 06:00:00
+to 2024-12-09 06:00:00
+Ushear1 Space Mean =  0.004194319
+Ushear2 Space Mean =  0.004108007
+Change_Time_Step
+
+time: 2024-12-06_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-02 12:00:00
+to 2024-12-09 12:00:00
+Ushear1 Space Mean =  0.0041318354
+Ushear2 Space Mean =  0.0040437337
+Change_Time_Step
+
+time: 2024-12-06_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-02 18:00:00
+to 2024-12-09 18:00:00
+Ushear1 Space Mean =  0.004061643
+Ushear2 Space Mean =  0.0039730472
+Change_Time_Step
+
+time: 2024-12-06_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-03 00:00:00
+to 2024-12-10 00:00:00
+Ushear1 Space Mean =  0.0039590355
+Ushear2 Space Mean =  0.0038716942
+Change_Time_Step
+
+time: 2024-12-06_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-03 06:00:00
+to 2024-12-10 06:00:00
+Ushear1 Space Mean =  0.0038754186
+Ushear2 Space Mean =  0.0037840498
+Change_Time_Step
+
+time: 2024-12-07_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-03 12:00:00
+to 2024-12-10 12:00:00
+Ushear1 Space Mean =  0.0038072236
+Ushear2 Space Mean =  0.0037139505
+Change_Time_Step
+
+time: 2024-12-07_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-03 18:00:00
+to 2024-12-10 18:00:00
+Ushear1 Space Mean =  0.00375904
+Ushear2 Space Mean =  0.003666928
+Change_Time_Step
+
+time: 2024-12-07_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-04 00:00:00
+to 2024-12-11 00:00:00
+Ushear1 Space Mean =  0.003706628
+Ushear2 Space Mean =  0.0036157363
+Change_Time_Step
+
+time: 2024-12-07_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-04 06:00:00
+to 2024-12-11 06:00:00
+Ushear1 Space Mean =  0.0036555936
+Ushear2 Space Mean =  0.0035748289
+Change_Time_Step
+
+time: 2024-12-08_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-04 12:00:00
+to 2024-12-11 12:00:00
+Ushear1 Space Mean =  0.003644076
+Ushear2 Space Mean =  0.003566171
+Change_Time_Step
+
+time: 2024-12-08_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-04 18:00:00
+to 2024-12-11 18:00:00
+Ushear1 Space Mean =  0.003634945
+Ushear2 Space Mean =  0.0035537977
+Change_Time_Step
+
+time: 2024-12-08_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-05 00:00:00
+to 2024-12-12 00:00:00
+Ushear1 Space Mean =  0.0036087774
+Ushear2 Space Mean =  0.003528105
+Change_Time_Step
+
+time: 2024-12-08_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-05 06:00:00
+to 2024-12-12 06:00:00
+Ushear1 Space Mean =  0.003590344
+Ushear2 Space Mean =  0.003508089
+Change_Time_Step
+
+time: 2024-12-09_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-05 12:00:00
+to 2024-12-12 12:00:00
+Ushear1 Space Mean =  0.0035808107
+Ushear2 Space Mean =  0.003494873
+Change_Time_Step
+
+time: 2024-12-09_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-05 18:00:00
+to 2024-12-12 18:00:00
+Ushear1 Space Mean =  0.0035740812
+Ushear2 Space Mean =  0.0034816745
+Change_Time_Step
+
+time: 2024-12-09_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-06 00:00:00
+to 2024-12-13 00:00:00
+Ushear1 Space Mean =  0.0035690677
+Ushear2 Space Mean =  0.003467044
+Change_Time_Step
+
+time: 2024-12-09_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-06 06:00:00
+to 2024-12-13 06:00:00
+Ushear1 Space Mean =  0.00354342
+Ushear2 Space Mean =  0.0034444588
+Change_Time_Step
+
+time: 2024-12-10_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-06 12:00:00
+to 2024-12-13 12:00:00
+Ushear1 Space Mean =  0.0035354504
+Ushear2 Space Mean =  0.0034424607
+Change_Time_Step
+
+time: 2024-12-10_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-06 18:00:00
+to 2024-12-13 18:00:00
+Ushear1 Space Mean =  0.003541614
+Ushear2 Space Mean =  0.0034520878
+Change_Time_Step
+
+time: 2024-12-10_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-07 00:00:00
+to 2024-12-14 00:00:00
+Ushear1 Space Mean =  0.0035450195
+Ushear2 Space Mean =  0.0034490703
+Change_Time_Step
+
+time: 2024-12-10_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-07 06:00:00
+to 2024-12-14 06:00:00
+Ushear1 Space Mean =  0.0035251908
+Ushear2 Space Mean =  0.0034302769
+Change_Time_Step
+
+time: 2024-12-11_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-07 12:00:00
+to 2024-12-14 12:00:00
+Ushear1 Space Mean =  0.0034871197
+Ushear2 Space Mean =  0.003406709
+Change_Time_Step
+
+time: 2024-12-11_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-07 18:00:00
+to 2024-12-14 18:00:00
+Ushear1 Space Mean =  0.0034546712
+Ushear2 Space Mean =  0.0033840833
+Change_Time_Step
+
+time: 2024-12-11_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-08 00:00:00
+to 2024-12-15 00:00:00
+Ushear1 Space Mean =  0.0034435773
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.0033800455
+Change_Time_Step
+
+time: 2024-12-11_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-08 06:00:00
+to 2024-12-15 06:00:00
+Ushear1 Space Mean =  0.0034555735
+Ushear2 Space Mean =  0.0033954422
+Change_Time_Step
+
+time: 2024-12-12_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-08 12:00:00
+to 2024-12-15 12:00:00
+Ushear1 Space Mean =  0.0034869832
+Ushear2 Space Mean =  0.0034361691
+Change_Time_Step
+
+time: 2024-12-12_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-08 18:00:00
+to 2024-12-15 18:00:00
+Ushear1 Space Mean =  0.0034986467
+Ushear2 Space Mean =  0.003453895
+Change_Time_Step
+
+time: 2024-12-12_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-09 00:00:00
+to 2024-12-16 00:00:00
+Ushear1 Space Mean =  0.00350917
+Ushear2 Space Mean =  0.003464276
+Change_Time_Step
+
+time: 2024-12-12_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-09 06:00:00
+to 2024-12-16 06:00:00
+Ushear1 Space Mean =  0.0035307452
+Ushear2 Space Mean =  0.0034841727
+Change_Time_Step
+
+time: 2024-12-13_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-09 12:00:00
+to 2024-12-16 12:00:00
+Ushear1 Space Mean =  0.003577441
+Ushear2 Space Mean =  0.0035318704
+Change_Time_Step
+
+time: 2024-12-13_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-09 18:00:00
+to 2024-12-16 18:00:00
+Ushear1 Space Mean =  0.0036321105
+Ushear2 Space Mean =  0.0035875358
+Change_Time_Step
+
+time: 2024-12-13_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-10 00:00:00
+to 2024-12-17 00:00:00
+Ushear1 Space Mean =  0.0036989436
+Ushear2 Space Mean =  0.0036494771
+Change_Time_Step
+
+time: 2024-12-13_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-10 06:00:00
+to 2024-12-17 06:00:00
+Ushear1 Space Mean =  0.0037566053
+Ushear2 Space Mean =  0.0037009786
+Change_Time_Step
+
+time: 2024-12-14_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-10 12:00:00
+to 2024-12-17 12:00:00
+Ushear1 Space Mean =  0.0037991724
+Ushear2 Space Mean =  0.003743602
+Change_Time_Step
+
+time: 2024-12-14_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-10 18:00:00
+to 2024-12-17 18:00:00
+Ushear1 Space Mean =  0.0038287386
+Ushear2 Space Mean =  0.0037713395
+Change_Time_Step
+
+time: 2024-12-14_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-11 00:00:00
+to 2024-12-18 00:00:00
+Ushear1 Space Mean =  0.0038329556
+Ushear2 Space Mean =  0.0037696047
+Change_Time_Step
+
+time: 2024-12-14_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-11 06:00:00
+to 2024-12-18 06:00:00
+Ushear1 Space Mean =  0.0038180884
+Ushear2 Space Mean =  0.003750133
+Change_Time_Step
+
+time: 2024-12-15_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-11 12:00:00
+to 2024-12-18 12:00:00
+Ushear1 Space Mean =  0.0037949516
+Ushear2 Space Mean =  0.0037257192
+Change_Time_Step
+
+time: 2024-12-15_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-11 18:00:00
+to 2024-12-18 18:00:00
+Ushear1 Space Mean =  0.0037671586
+Ushear2 Space Mean =  0.0036957676
+Change_Time_Step
+
+time: 2024-12-15_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-12 00:00:00
+to 2024-12-19 00:00:00
+Ushear1 Space Mean =  0.0037340252
+Ushear2 Space Mean =  0.0036690766
+Change_Time_Step
+
+time: 2024-12-15_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-12 06:00:00
+to 2024-12-19 06:00:00
+Ushear1 Space Mean =  0.0036950037
+Ushear2 Space Mean =  0.0036392175
+Change_Time_Step
+
+time: 2024-12-16_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-12 12:00:00
+to 2024-12-19 12:00:00
+Ushear1 Space Mean =  0.0036558325
+Ushear2 Space Mean =  0.0036122515
+Change_Time_Step
+
+time: 2024-12-16_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-12 18:00:00
+to 2024-12-19 18:00:00
+Ushear1 Space Mean =  0.0036318218
+Ushear2 Space Mean =  0.003593034
+Change_Time_Step
+
+time: 2024-12-16_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-13 00:00:00
+to 2024-12-20 00:00:00
+Ushear1 Space Mean =  0.003599936
+Ushear2 Space Mean =  0.0035666837
+Change_Time_Step
+
+time: 2024-12-16_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-13 06:00:00
+to 2024-12-20 06:00:00
+Ushear1 Space Mean =  0.003585762
+Ushear2 Space Mean =  0.0035582376
+Change_Time_Step
+
+time: 2024-12-17_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-13 12:00:00
+to 2024-12-20 12:00:00
+Ushear1 Space Mean =  0.003580777
+Ushear2 Space Mean =  0.0035524233
+Change_Time_Step
+
+time: 2024-12-17_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-13 18:00:00
+to 2024-12-20 18:00:00
+Ushear1 Space Mean =  0.0035825742
+Ushear2 Space Mean =  0.0035473201
+Change_Time_Step
+
+time: 2024-12-17_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-14 00:00:00
+to 2024-12-21 00:00:00
+Ushear1 Space Mean =  0.0035910683
+Ushear2 Space Mean =  0.0035576331
+Change_Time_Step
+
+time: 2024-12-17_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-14 06:00:00
+to 2024-12-21 06:00:00
+Ushear1 Space Mean =  0.003622022
+Ushear2 Space Mean =  0.0035922455
+Change_Time_Step
+
+time: 2024-12-18_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-14 12:00:00
+to 2024-12-21 12:00:00
+Ushear1 Space Mean =  0.0036644347
+Ushear2 Space Mean =  0.0036268192
+Change_Time_Step
+
+time: 2024-12-18_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-14 18:00:00
+to 2024-12-21 18:00:00
+Ushear1 Space Mean =  0.0037001667
+Ushear2 Space Mean =  0.003659347
+Change_Time_Step
+
+time: 2024-12-18_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-15 00:00:00
+to 2024-12-22 00:00:00
+Ushear1 Space Mean =  0.003718265
+Ushear2 Space Mean =  0.0036707043
+Change_Time_Step
+
+time: 2024-12-18_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-15 06:00:00
+to 2024-12-22 06:00:00
+Ushear1 Space Mean =  0.003704849
+Ushear2 Space Mean =  0.0036557475
+Change_Time_Step
+
+time: 2024-12-19_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-15 12:00:00
+to 2024-12-22 12:00:00
+Ushear1 Space Mean =  0.0036658496
+Ushear2 Space Mean =  0.0036082326
+Change_Time_Step
+
+time: 2024-12-19_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-15 18:00:00
+to 2024-12-22 18:00:00
+Ushear1 Space Mean =  0.0036367355
+Ushear2 Space Mean =  0.0035839796
+Change_Time_Step
+
+time: 2024-12-19_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-16 00:00:00
+to 2024-12-23 00:00:00
+Ushear1 Space Mean =  0.0036062894
+Ushear2 Space Mean =  0.0035668025
+Change_Time_Step
+
+time: 2024-12-19_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-16 06:00:00
+to 2024-12-23 06:00:00
+Ushear1 Space Mean =  0.0035642337
+Ushear2 Space Mean =  0.003522915
+Change_Time_Step
+
+time: 2024-12-20_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-16 12:00:00
+to 2024-12-23 12:00:00
+Ushear1 Space Mean =  0.0034962432
+Ushear2 Space Mean =  0.0034527655
+Change_Time_Step
+
+time: 2024-12-20_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-16 18:00:00
+to 2024-12-23 18:00:00
+Ushear1 Space Mean =  0.0034232351
+Ushear2 Space Mean =  0.0033688364
+Change_Time_Step
+
+time: 2024-12-20_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-17 00:00:00
+to 2024-12-24 00:00:00
+Ushear1 Space Mean =  0.0033407945
+Ushear2 Space Mean =  0.003287558
+Change_Time_Step
+
+time: 2024-12-20_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-17 06:00:00
+to 2024-12-24 06:00:00
+Ushear1 Space Mean =  0.003246798
+Ushear2 Space Mean =  0.0032018886
+Change_Time_Step
+
+time: 2024-12-21_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-17 12:00:00
+to 2024-12-24 12:00:00
+Ushear1 Space Mean =  0.0031592248
+Ushear2 Space Mean =  0.003117251
+Change_Time_Step
+
+time: 2024-12-21_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-17 18:00:00
+to 2024-12-24 18:00:00
+Ushear1 Space Mean =  0.003086963
+Ushear2 Space Mean =  0.0030501545
+Change_Time_Step
+
+time: 2024-12-21_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-18 00:00:00
+to 2024-12-25 00:00:00
+Ushear1 Space Mean =  0.0030485461
+Ushear2 Space Mean =  0.003015402
+Change_Time_Step
+
+time: 2024-12-21_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-18 06:00:00
+to 2024-12-25 06:00:00
+Ushear1 Space Mean =  0.003038393
+Ushear2 Space Mean =  0.0030061353
+Change_Time_Step
+
+time: 2024-12-22_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-18 12:00:00
+to 2024-12-25 12:00:00
+Ushear1 Space Mean =  0.0030519336
+Ushear2 Space Mean =  0.0030158919
+Change_Time_Step
+
+time: 2024-12-22_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-18 18:00:00
+to 2024-12-25 18:00:00
+Ushear1 Space Mean =  0.0030806812
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.003050054
+Change_Time_Step
+
+time: 2024-12-22_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-19 00:00:00
+to 2024-12-26 00:00:00
+Ushear1 Space Mean =  0.003119947
+Ushear2 Space Mean =  0.0030893607
+Change_Time_Step
+
+time: 2024-12-22_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-19 06:00:00
+to 2024-12-26 06:00:00
+Ushear1 Space Mean =  0.003173008
+Ushear2 Space Mean =  0.0031407361
+Change_Time_Step
+
+time: 2024-12-23_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-19 12:00:00
+to 2024-12-26 12:00:00
+Ushear1 Space Mean =  0.0032228641
+Ushear2 Space Mean =  0.0031784063
+Change_Time_Step
+
+time: 2024-12-23_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-19 18:00:00
+to 2024-12-26 18:00:00
+Ushear1 Space Mean =  0.0032521172
+Ushear2 Space Mean =  0.0032024034
+Change_Time_Step
+
+time: 2024-12-23_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-20 00:00:00
+to 2024-12-27 00:00:00
+Ushear1 Space Mean =  0.0032883908
+Ushear2 Space Mean =  0.003231673
+Change_Time_Step
+
+time: 2024-12-23_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-20 06:00:00
+to 2024-12-27 06:00:00
+Ushear1 Space Mean =  0.0033191415
+Ushear2 Space Mean =  0.0032563715
+Change_Time_Step
+
+time: 2024-12-24_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-20 12:00:00
+to 2024-12-27 12:00:00
+Ushear1 Space Mean =  0.003326473
+Ushear2 Space Mean =  0.0032614272
+Change_Time_Step
+
+time: 2024-12-24_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-20 18:00:00
+to 2024-12-27 18:00:00
+Ushear1 Space Mean =  0.0032970838
+Ushear2 Space Mean =  0.003225882
+Change_Time_Step
+
+time: 2024-12-24_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-21 00:00:00
+to 2024-12-28 00:00:00
+Ushear1 Space Mean =  0.003262588
+Ushear2 Space Mean =  0.0031821828
+Change_Time_Step
+
+time: 2024-12-24_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-21 06:00:00
+to 2024-12-28 06:00:00
+Ushear1 Space Mean =  0.0032053126
+Ushear2 Space Mean =  0.0031187776
+Change_Time_Step
+
+time: 2024-12-25_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-21 12:00:00
+to 2024-12-28 12:00:00
+Ushear1 Space Mean =  0.003152233
+Ushear2 Space Mean =  0.003073298
+Change_Time_Step
+
+time: 2024-12-25_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-21 18:00:00
+to 2024-12-28 18:00:00
+Ushear1 Space Mean =  0.003124848
+Ushear2 Space Mean =  0.0030442628
+Change_Time_Step
+
+time: 2024-12-25_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-22 00:00:00
+to 2024-12-29 00:00:00
+Ushear1 Space Mean =  0.003110427
+Ushear2 Space Mean =  0.0030332645
+Change_Time_Step
+
+time: 2024-12-25_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-22 06:00:00
+to 2024-12-29 06:00:00
+Ushear1 Space Mean =  0.0031233956
+Ushear2 Space Mean =  0.0030460632
+Change_Time_Step
+
+time: 2024-12-26_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-22 12:00:00
+to 2024-12-29 12:00:00
+Ushear1 Space Mean =  0.0031582224
+Ushear2 Space Mean =  0.0030834517
+Change_Time_Step
+
+time: 2024-12-26_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-22 18:00:00
+to 2024-12-29 18:00:00
+Ushear1 Space Mean =  0.0032005964
+Ushear2 Space Mean =  0.0031158384
+Change_Time_Step
+
+time: 2024-12-26_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-23 00:00:00
+to 2024-12-30 00:00:00
+Ushear1 Space Mean =  0.0032319361
+Ushear2 Space Mean =  0.003140379
+Change_Time_Step
+
+time: 2024-12-26_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-23 06:00:00
+to 2024-12-30 06:00:00
+Ushear1 Space Mean =  0.0032659406
+Ushear2 Space Mean =  0.0031791152
+Change_Time_Step
+
+time: 2024-12-27_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-23 12:00:00
+to 2024-12-30 12:00:00
+Ushear1 Space Mean =  0.0033142935
+Ushear2 Space Mean =  0.0032275356
+Change_Time_Step
+
+time: 2024-12-27_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-23 18:00:00
+to 2024-12-30 18:00:00
+Ushear1 Space Mean =  0.003354427
+Ushear2 Space Mean =  0.0032837556
+Change_Time_Step
+
+time: 2024-12-27_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-24 00:00:00
+to 2024-12-31 00:00:00
+Ushear1 Space Mean =  0.003411876
+Ushear2 Space Mean =  0.003349517
+Change_Time_Step
+
+time: 2024-12-27_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-24 06:00:00
+to 2024-12-31 06:00:00
+Ushear1 Space Mean =  0.0034751578
+Ushear2 Space Mean =  0.0034097917
+Change_Time_Step
+
+time: 2024-12-28_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-24 12:00:00
+to 2024-12-31 12:00:00
+Ushear1 Space Mean =  0.0035273617
+Ushear2 Space Mean =  0.0034659207
+Change_Time_Step
+
+time: 2024-12-28_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-24 18:00:00
+to 2024-12-31 18:00:00
+Ushear1 Space Mean =  0.0035577524
+Ushear2 Space Mean =  0.0034970392
+Change_Time_Step
+
+time: 2024-12-28_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-25 00:00:00
+to 2025-01-01 00:00:00
+Ushear1 Space Mean =  0.003563986
+Ushear2 Space Mean =  0.0035055499
+Change_Time_Step
+
+time: 2024-12-28_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-25 06:00:00
+to 2025-01-01 06:00:00
+Ushear1 Space Mean =  0.0035761385
+Ushear2 Space Mean =  0.0035163318
+Change_Time_Step
+
+time: 2024-12-29_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-25 12:00:00
+to 2025-01-01 12:00:00
+Ushear1 Space Mean =  0.0035788594
+Ushear2 Space Mean =  0.003516072
+Change_Time_Step
+
+time: 2024-12-29_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-25 18:00:00
+to 2025-01-01 18:00:00
+Ushear1 Space Mean =  0.0035588061
+Ushear2 Space Mean =  0.0034965717
+Change_Time_Step
+
+time: 2024-12-29_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-26 00:00:00
+to 2025-01-02 00:00:00
+Ushear1 Space Mean =  0.0035494918
+Ushear2 Space Mean =  0.0034814263
+Change_Time_Step
+
+time: 2024-12-29_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-26 06:00:00
+to 2025-01-02 06:00:00
+Ushear1 Space Mean =  0.0035486647
+Ushear2 Space Mean =  0.0034758826
+Change_Time_Step
+
+time: 2024-12-30_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-26 12:00:00
+to 2025-01-02 12:00:00
+Ushear1 Space Mean =  0.003551206
+Ushear2 Space Mean =  0.0034868573
+Change_Time_Step
+
+time: 2024-12-30_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-26 18:00:00
+to 2025-01-02 18:00:00
+Ushear1 Space Mean =  0.0035634178
+Ushear2 Space Mean =  0.0035021803
+Change_Time_Step
+
+time: 2024-12-30_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-27 00:00:00
+to 2025-01-03 00:00:00
+Ushear1 Space Mean =  0.003579629
+Ushear2 Space Mean =  0.003524164
+Change_Time_Step
+
+time: 2024-12-30_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-27 06:00:00
+to 2025-01-03 06:00:00
+Ushear1 Space Mean =  0.0035999496
+Ushear2 Space Mean =  0.003549317
+Change_Time_Step
+
+time: 2024-12-31_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-27 12:00:00
+to 2025-01-03 12:00:00
+Ushear1 Space Mean =  0.0036294537
+Ushear2 Space Mean =  0.0035829584
+Change_Time_Step
+
+time: 2024-12-31_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-27 18:00:00
+to 2025-01-03 18:00:00
+Ushear1 Space Mean =  0.0036812315
+Ushear2 Space Mean =  0.0036413635
+Change_Time_Step
+
+time: 2024-12-31_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-28 00:00:00
+to 2025-01-04 00:00:00
+Ushear1 Space Mean =  0.0037377512
+Ushear2 Space Mean =  0.0037022466
+Change_Time_Step
+
+time: 2024-12-31_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-28 06:00:00
+to 2025-01-04 06:00:00
+Ushear1 Space Mean =  0.003796988
+Ushear2 Space Mean =  0.0037630626
+Change_Time_Step
+
+time: 2025-01-01_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-28 12:00:00
+to 2025-01-04 12:00:00
+Ushear1 Space Mean =  0.00384797
+Ushear2 Space Mean =  0.0038134842
+Change_Time_Step
+
+time: 2025-01-01_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-28 18:00:00
+to 2025-01-04 18:00:00
+Ushear1 Space Mean =  0.0038969822
+Ushear2 Space Mean =  0.0038687962
+Change_Time_Step
+
+time: 2025-01-01_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-29 00:00:00
+to 2025-01-05 00:00:00
+Ushear1 Space Mean =  0.003937044
+Ushear2 Space Mean =  0.0039111623
+Change_Time_Step
+
+time: 2025-01-01_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-29 06:00:00
+to 2025-01-05 06:00:00
+Ushear1 Space Mean =  0.003989897
+Ushear2 Space Mean =  0.003956448
+Change_Time_Step
+
+time: 2025-01-02_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-29 12:00:00
+to 2025-01-05 12:00:00
+Ushear1 Space Mean =  0.0040555866
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.0040124212
+Change_Time_Step
+
+time: 2025-01-02_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-29 18:00:00
+to 2025-01-05 18:00:00
+Ushear1 Space Mean =  0.0041227844
+Ushear2 Space Mean =  0.0040773917
+Change_Time_Step
+
+time: 2025-01-02_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-30 00:00:00
+to 2025-01-06 00:00:00
+Ushear1 Space Mean =  0.004166707
+Ushear2 Space Mean =  0.004123361
+Change_Time_Step
+
+time: 2025-01-02_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-30 06:00:00
+to 2025-01-06 06:00:00
+Ushear1 Space Mean =  0.0041933767
+Ushear2 Space Mean =  0.004148207
+Change_Time_Step
+
+time: 2025-01-03_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-30 12:00:00
+to 2025-01-06 12:00:00
+Ushear1 Space Mean =  0.004206494
+Ushear2 Space Mean =  0.0041672513
+Change_Time_Step
+
+time: 2025-01-03_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-30 18:00:00
+to 2025-01-06 18:00:00
+Ushear1 Space Mean =  0.0042338013
+Ushear2 Space Mean =  0.004195889
+Change_Time_Step
+
+time: 2025-01-03_12:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-31 00:00:00
+to 2025-01-07 00:00:00
+Ushear1 Space Mean =  0.0042654364
+Ushear2 Space Mean =  0.0042303614
+Change_Time_Step
+
+time: 2025-01-03_18:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-31 06:00:00
+to 2025-01-07 06:00:00
+Ushear1 Space Mean =  0.004287941
+Ushear2 Space Mean =  0.004251418
+Change_Time_Step
+
+time: 2025-01-04_00:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-31 12:00:00
+to 2025-01-07 12:00:00
+Ushear1 Space Mean =  0.004316597
+Ushear2 Space Mean =  0.004274204
+Change_Time_Step
+
+time: 2025-01-04_06:00:00
+Caluculate_7days_Moving_Mean
+from 2024-12-31 18:00:00
+to 2025-01-07 18:00:00
+Ushear1 Space Mean =  0.004325588
+Ushear2 Space Mean =  0.0042878236
+Change_Time_Step
+
+time: 2025-01-04_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-01 00:00:00
+to 2025-01-08 00:00:00
+Ushear1 Space Mean =  0.0043431194
+Ushear2 Space Mean =  0.004307557
+Change_Time_Step
+
+time: 2025-01-04_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-01 06:00:00
+to 2025-01-08 06:00:00
+Ushear1 Space Mean =  0.004355878
+Ushear2 Space Mean =  0.0043244343
+Change_Time_Step
+
+time: 2025-01-05_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-01 12:00:00
+to 2025-01-08 12:00:00
+Ushear1 Space Mean =  0.004376486
+Ushear2 Space Mean =  0.004345623
+Change_Time_Step
+
+time: 2025-01-05_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-01 18:00:00
+to 2025-01-08 18:00:00
+Ushear1 Space Mean =  0.004395204
+Ushear2 Space Mean =  0.004354196
+Change_Time_Step
+
+time: 2025-01-05_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-02 00:00:00
+to 2025-01-09 00:00:00
+Ushear1 Space Mean =  0.0043968954
+Ushear2 Space Mean =  0.0043482226
+Change_Time_Step
+
+time: 2025-01-05_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-02 06:00:00
+to 2025-01-09 06:00:00
+Ushear1 Space Mean =  0.0043857973
+Ushear2 Space Mean =  0.0043330914
+Change_Time_Step
+
+time: 2025-01-06_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-02 12:00:00
+to 2025-01-09 12:00:00
+Ushear1 Space Mean =  0.0043543116
+Ushear2 Space Mean =  0.004313166
+Change_Time_Step
+
+time: 2025-01-06_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-02 18:00:00
+to 2025-01-09 18:00:00
+Ushear1 Space Mean =  0.004312746
+Ushear2 Space Mean =  0.0042820014
+Change_Time_Step
+
+time: 2025-01-06_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-03 00:00:00
+to 2025-01-10 00:00:00
+Ushear1 Space Mean =  0.004251266
+Ushear2 Space Mean =  0.004237304
+Change_Time_Step
+
+time: 2025-01-06_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-03 06:00:00
+to 2025-01-10 06:00:00
+Ushear1 Space Mean =  0.0041914796
+Ushear2 Space Mean =  0.004181951
+Change_Time_Step
+
+time: 2025-01-07_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-03 12:00:00
+to 2025-01-10 12:00:00
+Ushear1 Space Mean =  0.0041424492
+Ushear2 Space Mean =  0.004122673
+Change_Time_Step
+
+time: 2025-01-07_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-03 18:00:00
+to 2025-01-10 18:00:00
+Ushear1 Space Mean =  0.0040787747
+Ushear2 Space Mean =  0.004054757
+Change_Time_Step
+
+time: 2025-01-07_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-04 00:00:00
+to 2025-01-11 00:00:00
+Ushear1 Space Mean =  0.0040184325
+Ushear2 Space Mean =  0.0039927396
+Change_Time_Step
+
+time: 2025-01-07_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-04 06:00:00
+to 2025-01-11 06:00:00
+Ushear1 Space Mean =  0.0039555007
+Ushear2 Space Mean =  0.003927394
+Change_Time_Step
+
+time: 2025-01-08_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-04 12:00:00
+to 2025-01-11 12:00:00
+Ushear1 Space Mean =  0.0038907188
+Ushear2 Space Mean =  0.0038615246
+Change_Time_Step
+
+time: 2025-01-08_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-04 18:00:00
+to 2025-01-11 18:00:00
+Ushear1 Space Mean =  0.0038292566
+Ushear2 Space Mean =  0.0037969914
+Change_Time_Step
+
+time: 2025-01-08_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-05 00:00:00
+to 2025-01-12 00:00:00
+Ushear1 Space Mean =  0.0037651453
+Ushear2 Space Mean =  0.0037238775
+Change_Time_Step
+
+time: 2025-01-08_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-05 06:00:00
+to 2025-01-12 06:00:00
+Ushear1 Space Mean =  0.0037025658
+Ushear2 Space Mean =  0.0036595631
+Change_Time_Step
+
+time: 2025-01-09_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-05 12:00:00
+to 2025-01-12 12:00:00
+Ushear1 Space Mean =  0.0036366524
+Ushear2 Space Mean =  0.0035934192
+Change_Time_Step
+
+time: 2025-01-09_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-05 18:00:00
+to 2025-01-12 18:00:00
+Ushear1 Space Mean =  0.0035755641
+Ushear2 Space Mean =  0.0035272553
+Change_Time_Step
+
+time: 2025-01-09_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-06 00:00:00
+to 2025-01-13 00:00:00
+Ushear1 Space Mean =  0.0035099487
+Ushear2 Space Mean =  0.0034626734
+Change_Time_Step
+
+time: 2025-01-09_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-06 06:00:00
+to 2025-01-13 06:00:00
+Ushear1 Space Mean =  0.003439404
+Ushear2 Space Mean =  0.0033921073
+Change_Time_Step
+
+time: 2025-01-10_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-06 12:00:00
+to 2025-01-13 12:00:00
+Ushear1 Space Mean =  0.003373934
+Ushear2 Space Mean =  0.0033164404
+Change_Time_Step
+
+time: 2025-01-10_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-06 18:00:00
+to 2025-01-13 18:00:00
+Ushear1 Space Mean =  0.0032910039
+Ushear2 Space Mean =  0.0032323326
+Change_Time_Step
+
+time: 2025-01-10_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-07 00:00:00
+to 2025-01-14 00:00:00
+Ushear1 Space Mean =  0.003190674
+Ushear2 Space Mean =  0.003131134
+Change_Time_Step
+
+time: 2025-01-10_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-07 06:00:00
+to 2025-01-14 06:00:00
+Ushear1 Space Mean =  0.003096786
+Ushear2 Space Mean =  0.0030384348
+Change_Time_Step
+
+time: 2025-01-11_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-07 12:00:00
+to 2025-01-14 12:00:00
+Ushear1 Space Mean =  0.003028568
+Ushear2 Space Mean =  0.0029668459
+Change_Time_Step
+
+time: 2025-01-11_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-07 18:00:00
+to 2025-01-14 18:00:00
+Ushear1 Space Mean =  0.0030022836
+Ushear2 Space Mean =  0.0029338023
+Change_Time_Step
+
+time: 2025-01-11_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-08 00:00:00
+to 2025-01-15 00:00:00
+Ushear1 Space Mean =  0.0029769207
+Ushear2 Space Mean =  0.0029069653
+Change_Time_Step
+
+time: 2025-01-11_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-08 06:00:00
+to 2025-01-15 06:00:00
+Ushear1 Space Mean =  0.00293346
+Ushear2 Space Mean =  0.0028658826
+Change_Time_Step
+
+time: 2025-01-12_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-08 12:00:00
+to 2025-01-15 12:00:00
+Ushear1 Space Mean =  0.0028872646
+Ushear2 Space Mean =  0.0028228194
+Change_Time_Step
+
+time: 2025-01-12_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-08 18:00:00
+to 2025-01-15 18:00:00
+Ushear1 Space Mean =  0.0028563894
+Ushear2 Space Mean =  0.0028002611
+Change_Time_Step
+
+time: 2025-01-12_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-09 00:00:00
+to 2025-01-16 00:00:00
+Ushear1 Space Mean =  0.0028332681
+Ushear2 Space Mean =  0.0027969803
+Change_Time_Step
+
+time: 2025-01-12_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-09 06:00:00
+to 2025-01-16 06:00:00
+Ushear1 Space Mean =  0.0028210676
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.002794777
+Change_Time_Step
+
+time: 2025-01-13_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-09 12:00:00
+to 2025-01-16 12:00:00
+Ushear1 Space Mean =  0.0028518657
+Ushear2 Space Mean =  0.00282645
+Change_Time_Step
+
+time: 2025-01-13_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-09 18:00:00
+to 2025-01-16 18:00:00
+Ushear1 Space Mean =  0.0029060093
+Ushear2 Space Mean =  0.0028752896
+Change_Time_Step
+
+time: 2025-01-13_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-10 00:00:00
+to 2025-01-17 00:00:00
+Ushear1 Space Mean =  0.0029727614
+Ushear2 Space Mean =  0.0029347527
+Change_Time_Step
+
+time: 2025-01-13_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-10 06:00:00
+to 2025-01-17 06:00:00
+Ushear1 Space Mean =  0.0030233401
+Ushear2 Space Mean =  0.0029757165
+Change_Time_Step
+
+time: 2025-01-14_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-10 12:00:00
+to 2025-01-17 12:00:00
+Ushear1 Space Mean =  0.0030687354
+Ushear2 Space Mean =  0.0030180444
+Change_Time_Step
+
+time: 2025-01-14_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-10 18:00:00
+to 2025-01-17 18:00:00
+Ushear1 Space Mean =  0.0031090572
+Ushear2 Space Mean =  0.0030658655
+Change_Time_Step
+
+time: 2025-01-14_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-11 00:00:00
+to 2025-01-18 00:00:00
+Ushear1 Space Mean =  0.0031431692
+Ushear2 Space Mean =  0.0031063778
+Change_Time_Step
+
+time: 2025-01-14_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-11 06:00:00
+to 2025-01-18 06:00:00
+Ushear1 Space Mean =  0.0031861097
+Ushear2 Space Mean =  0.0031490654
+Change_Time_Step
+
+time: 2025-01-15_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-11 12:00:00
+to 2025-01-18 12:00:00
+Ushear1 Space Mean =  0.0032081488
+Ushear2 Space Mean =  0.0031660432
+Change_Time_Step
+
+time: 2025-01-15_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-11 18:00:00
+to 2025-01-18 18:00:00
+Ushear1 Space Mean =  0.0032165651
+Ushear2 Space Mean =  0.003172495
+Change_Time_Step
+
+time: 2025-01-15_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-12 00:00:00
+to 2025-01-19 00:00:00
+Ushear1 Space Mean =  0.0032230448
+Ushear2 Space Mean =  0.003181781
+Change_Time_Step
+
+time: 2025-01-15_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-12 06:00:00
+to 2025-01-19 06:00:00
+Ushear1 Space Mean =  0.003216186
+Ushear2 Space Mean =  0.0031781476
+Change_Time_Step
+
+time: 2025-01-16_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-12 12:00:00
+to 2025-01-19 12:00:00
+Ushear1 Space Mean =  0.00319203
+Ushear2 Space Mean =  0.0031586827
+Change_Time_Step
+
+time: 2025-01-16_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-12 18:00:00
+to 2025-01-19 18:00:00
+Ushear1 Space Mean =  0.0031790086
+Ushear2 Space Mean =  0.0031496196
+Change_Time_Step
+
+time: 2025-01-16_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-13 00:00:00
+to 2025-01-20 00:00:00
+Ushear1 Space Mean =  0.0031904578
+Ushear2 Space Mean =  0.0031555735
+Change_Time_Step
+
+time: 2025-01-16_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-13 06:00:00
+to 2025-01-20 06:00:00
+Ushear1 Space Mean =  0.0032047736
+Ushear2 Space Mean =  0.0031818177
+Change_Time_Step
+
+time: 2025-01-17_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-13 12:00:00
+to 2025-01-20 12:00:00
+Ushear1 Space Mean =  0.0032076782
+Ushear2 Space Mean =  0.0031874639
+Change_Time_Step
+
+time: 2025-01-17_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-13 18:00:00
+to 2025-01-20 18:00:00
+Ushear1 Space Mean =  0.0032260828
+Ushear2 Space Mean =  0.0031942807
+Change_Time_Step
+
+time: 2025-01-17_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-14 00:00:00
+to 2025-01-21 00:00:00
+Ushear1 Space Mean =  0.0032395513
+Ushear2 Space Mean =  0.0032100773
+Change_Time_Step
+
+time: 2025-01-17_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-14 06:00:00
+to 2025-01-21 06:00:00
+Ushear1 Space Mean =  0.0032530497
+Ushear2 Space Mean =  0.0032229212
+Change_Time_Step
+
+time: 2025-01-18_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-14 12:00:00
+to 2025-01-21 12:00:00
+Ushear1 Space Mean =  0.0032555896
+Ushear2 Space Mean =  0.0032259678
+Change_Time_Step
+
+time: 2025-01-18_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-14 18:00:00
+to 2025-01-21 18:00:00
+Ushear1 Space Mean =  0.0032573992
+Ushear2 Space Mean =  0.003220066
+Change_Time_Step
+
+time: 2025-01-18_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-15 00:00:00
+to 2025-01-22 00:00:00
+Ushear1 Space Mean =  0.003227494
+Ushear2 Space Mean =  0.0031972984
+Change_Time_Step
+
+time: 2025-01-18_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-15 06:00:00
+to 2025-01-22 06:00:00
+Ushear1 Space Mean =  0.003199317
+Ushear2 Space Mean =  0.003173195
+Change_Time_Step
+
+time: 2025-01-19_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-15 12:00:00
+to 2025-01-22 12:00:00
+Ushear1 Space Mean =  0.0031879127
+Ushear2 Space Mean =  0.003166394
+Change_Time_Step
+
+time: 2025-01-19_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-15 18:00:00
+to 2025-01-22 18:00:00
+Ushear1 Space Mean =  0.0031976425
+Ushear2 Space Mean =  0.0031872056
+Change_Time_Step
+
+time: 2025-01-19_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-16 00:00:00
+to 2025-01-23 00:00:00
+Ushear1 Space Mean =  0.0032030765
+Ushear2 Space Mean =  0.0032001191
+Change_Time_Step
+
+time: 2025-01-19_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-16 06:00:00
+to 2025-01-23 06:00:00
+Ushear1 Space Mean =  0.003200986
+Ushear2 Space Mean =  0.0032102463
+Change_Time_Step
+
+time: 2025-01-20_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-16 12:00:00
+to 2025-01-23 12:00:00
+Ushear1 Space Mean =  0.0031885128
+Ushear2 Space Mean =  0.003198128
+Change_Time_Step
+
+time: 2025-01-20_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-16 18:00:00
+to 2025-01-23 18:00:00
+Ushear1 Space Mean =  0.0031942558
+Ushear2 Space Mean =  0.0031989545
+Change_Time_Step
+
+time: 2025-01-20_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-17 00:00:00
+to 2025-01-24 00:00:00
+Ushear1 Space Mean =  0.0031965175
+Ushear2 Space Mean =  0.0031890422
+Change_Time_Step
+
+time: 2025-01-20_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-17 06:00:00
+to 2025-01-24 06:00:00
+Ushear1 Space Mean =  0.0032077439
+Ushear2 Space Mean =  0.0032011732
+Change_Time_Step
+
+time: 2025-01-21_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-17 12:00:00
+to 2025-01-24 12:00:00
+Ushear1 Space Mean =  0.0032128494
+Ushear2 Space Mean =  0.0032183453
+Change_Time_Step
+
+time: 2025-01-21_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-17 18:00:00
+to 2025-01-24 18:00:00
+Ushear1 Space Mean =  0.0032246984
+Ushear2 Space Mean =  0.003225346
+Change_Time_Step
+
+time: 2025-01-21_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-18 00:00:00
+to 2025-01-25 00:00:00
+Ushear1 Space Mean =  0.0032403353
+Ushear2 Space Mean =  0.0032294255
+Change_Time_Step
+
+time: 2025-01-21_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-18 06:00:00
+to 2025-01-25 06:00:00
+Ushear1 Space Mean =  0.0032429553
+Ushear2 Space Mean =  0.0032338
+Change_Time_Step
+
+time: 2025-01-22_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-18 12:00:00
+to 2025-01-25 12:00:00
+Ushear1 Space Mean =  0.0032378235
+Ushear2 Space Mean =  0.003232281
+Change_Time_Step
+
+time: 2025-01-22_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-18 18:00:00
+to 2025-01-25 18:00:00
+Ushear1 Space Mean =  0.0032456205
+Ushear2 Space Mean =  0.0032360093
+Change_Time_Step
+
+time: 2025-01-22_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-19 00:00:00
+to 2025-01-26 00:00:00
+Ushear1 Space Mean =  0.0032368521
+Ushear2 Space Mean =  0.0032220464
+Change_Time_Step
+
+time: 2025-01-22_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-19 06:00:00
+to 2025-01-26 06:00:00
+Ushear1 Space Mean =  0.0032114785
+Ushear2 Space Mean =  0.0031908324
+Change_Time_Step
+
+time: 2025-01-23_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-19 12:00:00
+to 2025-01-26 12:00:00
+Ushear1 Space Mean =  0.0031877162
+Ushear2 Space Mean =  0.0031619384
+Change_Time_Step
+
+time: 2025-01-23_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-19 18:00:00
+to 2025-01-26 18:00:00
+Ushear1 Space Mean =  0.003171122
+Ushear2 Space Mean =  0.0031385182
+Change_Time_Step
+
+time: 2025-01-23_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-20 00:00:00
+to 2025-01-27 00:00:00
+Ushear1 Space Mean =  0.0031304518
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.0031045917
+Change_Time_Step
+
+time: 2025-01-23_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-20 06:00:00
+to 2025-01-27 06:00:00
+Ushear1 Space Mean =  0.003097984
+Ushear2 Space Mean =  0.0030664832
+Change_Time_Step
+
+time: 2025-01-24_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-20 12:00:00
+to 2025-01-27 12:00:00
+Ushear1 Space Mean =  0.0030774144
+Ushear2 Space Mean =  0.0030511415
+Change_Time_Step
+
+time: 2025-01-24_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-20 18:00:00
+to 2025-01-27 18:00:00
+Ushear1 Space Mean =  0.0030670979
+Ushear2 Space Mean =  0.0030526437
+Change_Time_Step
+
+time: 2025-01-24_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-21 00:00:00
+to 2025-01-28 00:00:00
+Ushear1 Space Mean =  0.003061938
+Ushear2 Space Mean =  0.003043428
+Change_Time_Step
+
+time: 2025-01-24_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-21 06:00:00
+to 2025-01-28 06:00:00
+Ushear1 Space Mean =  0.003060159
+Ushear2 Space Mean =  0.0030418972
+Change_Time_Step
+
+time: 2025-01-25_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-21 12:00:00
+to 2025-01-28 12:00:00
+Ushear1 Space Mean =  0.003048662
+Ushear2 Space Mean =  0.0030411638
+Change_Time_Step
+
+time: 2025-01-25_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-21 18:00:00
+to 2025-01-28 18:00:00
+Ushear1 Space Mean =  0.003025614
+Ushear2 Space Mean =  0.0030279611
+Change_Time_Step
+
+time: 2025-01-25_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-22 00:00:00
+to 2025-01-29 00:00:00
+Ushear1 Space Mean =  0.0030132823
+Ushear2 Space Mean =  0.003004462
+Change_Time_Step
+
+time: 2025-01-25_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-22 06:00:00
+to 2025-01-29 06:00:00
+Ushear1 Space Mean =  0.0030133408
+Ushear2 Space Mean =  0.0029940114
+Change_Time_Step
+
+time: 2025-01-26_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-22 12:00:00
+to 2025-01-29 12:00:00
+Ushear1 Space Mean =  0.0030173762
+Ushear2 Space Mean =  0.002990836
+Change_Time_Step
+
+time: 2025-01-26_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-22 18:00:00
+to 2025-01-29 18:00:00
+Ushear1 Space Mean =  0.0030202684
+Ushear2 Space Mean =  0.0029902677
+Change_Time_Step
+
+time: 2025-01-26_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-23 00:00:00
+to 2025-01-30 00:00:00
+Ushear1 Space Mean =  0.0030321095
+Ushear2 Space Mean =  0.002996592
+Change_Time_Step
+
+time: 2025-01-26_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-23 06:00:00
+to 2025-01-30 06:00:00
+Ushear1 Space Mean =  0.0030506554
+Ushear2 Space Mean =  0.0029963185
+Change_Time_Step
+
+time: 2025-01-27_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-23 12:00:00
+to 2025-01-30 12:00:00
+Ushear1 Space Mean =  0.0030627635
+Ushear2 Space Mean =  0.0029977271
+Change_Time_Step
+
+time: 2025-01-27_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-23 18:00:00
+to 2025-01-30 18:00:00
+Ushear1 Space Mean =  0.0030580233
+Ushear2 Space Mean =  0.0029942454
+Change_Time_Step
+
+time: 2025-01-27_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-24 00:00:00
+to 2025-01-31 00:00:00
+Ushear1 Space Mean =  0.0030509657
+Ushear2 Space Mean =  0.0029987649
+Change_Time_Step
+
+time: 2025-01-27_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-24 06:00:00
+to 2025-01-31 06:00:00
+Ushear1 Space Mean =  0.0030504828
+Ushear2 Space Mean =  0.0030021395
+Change_Time_Step
+
+time: 2025-01-28_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-24 12:00:00
+to 2025-01-31 12:00:00
+Ushear1 Space Mean =  0.0030654476
+Ushear2 Space Mean =  0.0030131664
+Change_Time_Step
+
+time: 2025-01-28_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-24 18:00:00
+to 2025-01-31 18:00:00
+Ushear1 Space Mean =  0.0030844924
+Ushear2 Space Mean =  0.003041225
+Change_Time_Step
+
+time: 2025-01-28_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-25 00:00:00
+to 2025-02-01 00:00:00
+Ushear1 Space Mean =  0.0031007894
+Ushear2 Space Mean =  0.0030714925
+Change_Time_Step
+
+time: 2025-01-28_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-25 06:00:00
+to 2025-02-01 06:00:00
+Ushear1 Space Mean =  0.0031171707
+Ushear2 Space Mean =  0.0030965619
+Change_Time_Step
+
+time: 2025-01-29_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-25 12:00:00
+to 2025-02-01 12:00:00
+Ushear1 Space Mean =  0.0031380947
+Ushear2 Space Mean =  0.003130345
+Change_Time_Step
+
+time: 2025-01-29_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-25 18:00:00
+to 2025-02-01 18:00:00
+Ushear1 Space Mean =  0.0031576774
+Ushear2 Space Mean =  0.0031579887
+Change_Time_Step
+
+time: 2025-01-29_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-26 00:00:00
+to 2025-02-02 00:00:00
+Ushear1 Space Mean =  0.003200279
+Ushear2 Space Mean =  0.0032059941
+Change_Time_Step
+
+time: 2025-01-29_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-26 06:00:00
+to 2025-02-02 06:00:00
+Ushear1 Space Mean =  0.003263699
+Ushear2 Space Mean =  0.0032791723
+Change_Time_Step
+
+time: 2025-01-30_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-26 12:00:00
+to 2025-02-02 12:00:00
+Ushear1 Space Mean =  0.0033347888
+Ushear2 Space Mean =  0.0033549264
+Change_Time_Step
+
+time: 2025-01-30_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-26 18:00:00
+to 2025-02-02 18:00:00
+Ushear1 Space Mean =  0.0034024797
+Ushear2 Space Mean =  0.0034240193
+Change_Time_Step
+
+time: 2025-01-30_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-27 00:00:00
+to 2025-02-03 00:00:00
+Ushear1 Space Mean =  0.003472949
+Ushear2 Space Mean =  0.003502575
+Change_Time_Step
+
+time: 2025-01-30_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-27 06:00:00
+to 2025-02-03 06:00:00
+Ushear1 Space Mean =  0.0035351228
+Ushear2 Space Mean =  0.0035701867
+Change_Time_Step
+
+time: 2025-01-31_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-27 12:00:00
+to 2025-02-03 12:00:00
+Ushear1 Space Mean =  0.0035901042
+Ushear2 Space Mean =  0.0036221582
+Change_Time_Step
+
+time: 2025-01-31_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-27 18:00:00
+to 2025-02-03 18:00:00
+Ushear1 Space Mean =  0.003623035
+Ushear2 Space Mean =  0.0036459097
+Change_Time_Step
+
+time: 2025-01-31_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-28 00:00:00
+to 2025-02-04 00:00:00
+Ushear1 Space Mean =  0.0036519088
+Ushear2 Space Mean =  0.003666544
+Change_Time_Step
+
+time: 2025-01-31_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-28 06:00:00
+to 2025-02-04 06:00:00
+Ushear1 Space Mean =  0.003655896
+Ushear2 Space Mean =  0.0036670784
+Change_Time_Step
+
+time: 2025-02-01_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-28 12:00:00
+to 2025-02-04 12:00:00
+Ushear1 Space Mean =  0.0036458296
+Ushear2 Space Mean =  0.0036398815
+Change_Time_Step
+
+time: 2025-02-01_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-28 18:00:00
+to 2025-02-04 18:00:00
+Ushear1 Space Mean =  0.0036276898
+Ushear2 Space Mean =  0.0036133751
+Change_Time_Step
+
+time: 2025-02-01_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-29 00:00:00
+to 2025-02-05 00:00:00
+Ushear1 Space Mean =  0.0036235251
+Ushear2 Space Mean =  0.003612478
+Change_Time_Step
+
+time: 2025-02-01_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-29 06:00:00
+to 2025-02-05 06:00:00
+Ushear1 Space Mean =  0.0036230574
+Ushear2 Space Mean =  0.0036219168
+Change_Time_Step
+
+time: 2025-02-02_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-29 12:00:00
+to 2025-02-05 12:00:00
+Ushear1 Space Mean =  0.0036205808
+Ushear2 Space Mean =  0.0036193065
+Change_Time_Step
+
+time: 2025-02-02_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-29 18:00:00
+to 2025-02-05 18:00:00
+Ushear1 Space Mean =  0.0036193188
+Ushear2 Space Mean =  0.0036165798
+Change_Time_Step
+
+time: 2025-02-02_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-30 00:00:00
+to 2025-02-06 00:00:00
+Ushear1 Space Mean =  0.0036176257
+Ushear2 Space Mean =  0.0036238416
+Change_Time_Step
+
+time: 2025-02-02_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-30 06:00:00
+to 2025-02-06 06:00:00
+Ushear1 Space Mean =  0.0036300742
+Ushear2 Space Mean =  0.0036456676
+Change_Time_Step
+
+time: 2025-02-03_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-30 12:00:00
+to 2025-02-06 12:00:00
+Ushear1 Space Mean =  0.00365428
+Ushear2 Space Mean =  0.0036889995
+Change_Time_Step
+
+time: 2025-02-03_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-30 18:00:00
+to 2025-02-06 18:00:00
+Ushear1 Space Mean =  0.0036812967
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+Ushear2 Space Mean =  0.0037188677
+Change_Time_Step
+
+time: 2025-02-03_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-31 00:00:00
+to 2025-02-07 00:00:00
+Ushear1 Space Mean =  0.003716724
+Ushear2 Space Mean =  0.0037422366
+Change_Time_Step
+
+time: 2025-02-03_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-31 06:00:00
+to 2025-02-07 06:00:00
+Ushear1 Space Mean =  0.0037439466
+Ushear2 Space Mean =  0.0037581553
+Change_Time_Step
+
+time: 2025-02-04_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-31 12:00:00
+to 2025-02-07 12:00:00
+Ushear1 Space Mean =  0.0037475594
+Ushear2 Space Mean =  0.003750953
+Change_Time_Step
+
+time: 2025-02-04_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-01-31 18:00:00
+to 2025-02-07 18:00:00
+Ushear1 Space Mean =  0.0037298072
+Ushear2 Space Mean =  0.0037257257
+Change_Time_Step
+
+time: 2025-02-04_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-01 00:00:00
+to 2025-02-08 00:00:00
+Ushear1 Space Mean =  0.0037134606
+Ushear2 Space Mean =  0.003704983
+Change_Time_Step
+
+time: 2025-02-04_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-01 06:00:00
+to 2025-02-08 06:00:00
+Ushear1 Space Mean =  0.0036777807
+Ushear2 Space Mean =  0.0036637376
+Change_Time_Step
+
+time: 2025-02-05_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-01 12:00:00
+to 2025-02-08 12:00:00
+Ushear1 Space Mean =  0.0036307888
+Ushear2 Space Mean =  0.0036080023
+Change_Time_Step
+
+time: 2025-02-05_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-01 18:00:00
+to 2025-02-08 18:00:00
+Ushear1 Space Mean =  0.0035681678
+Ushear2 Space Mean =  0.0035421464
+Change_Time_Step
+
+time: 2025-02-05_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-02 00:00:00
+to 2025-02-09 00:00:00
+Ushear1 Space Mean =  0.0035002662
+Ushear2 Space Mean =  0.003465861
+Change_Time_Step
+
+time: 2025-02-05_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-02 06:00:00
+to 2025-02-09 06:00:00
+Ushear1 Space Mean =  0.0034321109
+Ushear2 Space Mean =  0.0033925097
+Change_Time_Step
+
+time: 2025-02-06_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-02 12:00:00
+to 2025-02-09 12:00:00
+Ushear1 Space Mean =  0.003365799
+Ushear2 Space Mean =  0.0033223494
+Change_Time_Step
+
+time: 2025-02-06_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-02 18:00:00
+to 2025-02-09 18:00:00
+Ushear1 Space Mean =  0.0033026861
+Ushear2 Space Mean =  0.0032563224
+Change_Time_Step
+
+time: 2025-02-06_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-03 00:00:00
+to 2025-02-10 00:00:00
+Ushear1 Space Mean =  0.0032422075
+Ushear2 Space Mean =  0.0031873793
+Change_Time_Step
+
+time: 2025-02-06_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-03 06:00:00
+to 2025-02-10 06:00:00
+Ushear1 Space Mean =  0.0031830645
+Ushear2 Space Mean =  0.0031258229
+Change_Time_Step
+
+time: 2025-02-07_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-03 12:00:00
+to 2025-02-10 12:00:00
+Ushear1 Space Mean =  0.0031390856
+Ushear2 Space Mean =  0.0030816568
+Change_Time_Step
+
+time: 2025-02-07_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-03 18:00:00
+to 2025-02-10 18:00:00
+Ushear1 Space Mean =  0.003112458
+Ushear2 Space Mean =  0.0030546936
+Change_Time_Step
+
+time: 2025-02-07_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-04 00:00:00
+to 2025-02-11 00:00:00
+Ushear1 Space Mean =  0.0030784835
+Ushear2 Space Mean =  0.0030246302
+Change_Time_Step
+
+time: 2025-02-07_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-04 06:00:00
+to 2025-02-11 06:00:00
+Ushear1 Space Mean =  0.0030510875
+Ushear2 Space Mean =  0.0030055237
+Change_Time_Step
+
+time: 2025-02-08_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-04 12:00:00
+to 2025-02-11 12:00:00
+Ushear1 Space Mean =  0.0030136218
+Ushear2 Space Mean =  0.002988882
+Change_Time_Step
+
+time: 2025-02-08_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-04 18:00:00
+to 2025-02-11 18:00:00
+Ushear1 Space Mean =  0.0029829352
+Ushear2 Space Mean =  0.0029812509
+Change_Time_Step
+
+time: 2025-02-08_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-05 00:00:00
+to 2025-02-12 00:00:00
+Ushear1 Space Mean =  0.0029563732
+Ushear2 Space Mean =  0.0029578407
+Change_Time_Step
+
+time: 2025-02-08_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-05 06:00:00
+to 2025-02-12 06:00:00
+Ushear1 Space Mean =  0.0029249252
+Ushear2 Space Mean =  0.0029240304
+Change_Time_Step
+
+time: 2025-02-09_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-05 12:00:00
+to 2025-02-12 12:00:00
+Ushear1 Space Mean =  0.0028881275
+Ushear2 Space Mean =  0.0028839773
+Change_Time_Step
+
+time: 2025-02-09_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-05 18:00:00
+to 2025-02-12 18:00:00
+Ushear1 Space Mean =  0.002859957
+Ushear2 Space Mean =  0.0028499677
+Change_Time_Step
+
+time: 2025-02-09_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-06 00:00:00
+to 2025-02-13 00:00:00
+Ushear1 Space Mean =  0.0028506336
+Ushear2 Space Mean =  0.0028270164
+Change_Time_Step
+
+time: 2025-02-09_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-06 06:00:00
+to 2025-02-13 06:00:00
+Ushear1 Space Mean =  0.002839383
+Ushear2 Space Mean =  0.0028101362
+Change_Time_Step
+
+time: 2025-02-10_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-06 12:00:00
+to 2025-02-13 12:00:00
+Ushear1 Space Mean =  0.0028092298
+Ushear2 Space Mean =  0.002766683
+Change_Time_Step
+
+time: 2025-02-10_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-06 18:00:00
+to 2025-02-13 18:00:00
+Ushear1 Space Mean =  0.002788805
+Ushear2 Space Mean =  0.0027491348
+Change_Time_Step
+
+time: 2025-02-10_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-07 00:00:00
+to 2025-02-14 00:00:00
+Ushear1 Space Mean =  0.0028000898
+Ushear2 Space Mean =  0.0027679526
+Change_Time_Step
+
+time: 2025-02-10_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-07 06:00:00
+to 2025-02-14 06:00:00
+Ushear1 Space Mean =  0.0028387487
+Ushear2 Space Mean =  0.0028063601
+Change_Time_Step
+
+time: 2025-02-11_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-07 12:00:00
+to 2025-02-14 12:00:00
+Ushear1 Space Mean =  0.002897209
+Ushear2 Space Mean =  0.0028581442
+Change_Time_Step
+
+time: 2025-02-11_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-07 18:00:00
+to 2025-02-14 18:00:00
+Ushear1 Space Mean =  0.0029490362
+Ushear2 Space Mean =  0.0029078883
+Change_Time_Step
+
+time: 2025-02-11_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-08 00:00:00
+to 2025-02-15 00:00:00
+Ushear1 Space Mean =  0.0030009556
+Ushear2 Space Mean =  0.002959623
+Change_Time_Step
+
+time: 2025-02-11_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-08 06:00:00
+to 2025-02-15 06:00:00
+Ushear1 Space Mean =  0.0030575716
+Ushear2 Space Mean =  0.0030105636
+Change_Time_Step
+
+time: 2025-02-12_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-08 12:00:00
+to 2025-02-15 12:00:00
+Ushear1 Space Mean =  0.0031315186
+Ushear2 Space Mean =  0.003071755
+Change_Time_Step
+
+time: 2025-02-12_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-08 18:00:00
+to 2025-02-15 18:00:00
+Ushear1 Space Mean =  0.0032083606
+Ushear2 Space Mean =  0.0031404276
+Change_Time_Step
+
+time: 2025-02-12_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-09 00:00:00
+to 2025-02-16 00:00:00
+Ushear1 Space Mean =  0.0032943413
+Ushear2 Space Mean =  0.0032304586
+Change_Time_Step
+
+time: 2025-02-12_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-09 06:00:00
+to 2025-02-16 06:00:00
+Ushear1 Space Mean =  0.0033795882
+Ushear2 Space Mean =  0.0033165966
+Change_Time_Step
+
+time: 2025-02-13_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-09 12:00:00
+to 2025-02-16 12:00:00
+Ushear1 Space Mean =  0.003449299
+Ushear2 Space Mean =  0.0033889723
+Change_Time_Step
+
+time: 2025-02-13_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-09 18:00:00
+to 2025-02-16 18:00:00
+Ushear1 Space Mean =  0.003512705
+Ushear2 Space Mean =  0.003456256
+Change_Time_Step
+
+time: 2025-02-13_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-10 00:00:00
+to 2025-02-17 00:00:00
+Ushear1 Space Mean =  0.0035808755
+Ushear2 Space Mean =  0.0035222808
+Change_Time_Step
+
+time: 2025-02-13_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-10 06:00:00
+to 2025-02-17 06:00:00
+Ushear1 Space Mean =  0.003641691
+Ushear2 Space Mean =  0.0035790296
+Change_Time_Step
+
+time: 2025-02-14_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-10 12:00:00
+to 2025-02-17 12:00:00
+Ushear1 Space Mean =  /home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+/home/akioz/miniconda3/envs/wrf/lib/python3.10/site-packages/xarray/computation/apply_ufunc.py:814: RuntimeWarning: invalid value encountered in sqrt
+  result_data = func(*input_data)
+0.0036522902
+Ushear2 Space Mean =  0.0035946595
+Change_Time_Step
+
+time: 2025-02-14_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-10 18:00:00
+to 2025-02-17 18:00:00
+Ushear1 Space Mean =  0.0036482322
+Ushear2 Space Mean =  0.0035928513
+Change_Time_Step
+
+time: 2025-02-14_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-11 00:00:00
+to 2025-02-18 00:00:00
+Ushear1 Space Mean =  0.0036424743
+Ushear2 Space Mean =  0.0035895421
+Change_Time_Step
+
+time: 2025-02-14_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-11 06:00:00
+to 2025-02-18 06:00:00
+Ushear1 Space Mean =  0.003628621
+Ushear2 Space Mean =  0.003582605
+Change_Time_Step
+
+time: 2025-02-15_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-11 12:00:00
+to 2025-02-18 12:00:00
+Ushear1 Space Mean =  0.0036029774
+Ushear2 Space Mean =  0.0035728768
+Change_Time_Step
+
+time: 2025-02-15_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-11 18:00:00
+to 2025-02-18 18:00:00
+Ushear1 Space Mean =  0.0035826082
+Ushear2 Space Mean =  0.0035632404
+Change_Time_Step
+
+time: 2025-02-15_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-12 00:00:00
+to 2025-02-19 00:00:00
+Ushear1 Space Mean =  0.003554065
+Ushear2 Space Mean =  0.003532204
+Change_Time_Step
+
+time: 2025-02-15_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-12 06:00:00
+to 2025-02-19 06:00:00
+Ushear1 Space Mean =  0.0035032078
+Ushear2 Space Mean =  0.0034853767
+Change_Time_Step
+
+time: 2025-02-16_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-12 12:00:00
+to 2025-02-19 12:00:00
+Ushear1 Space Mean =  0.0034383682
+Ushear2 Space Mean =  0.003417167
+Change_Time_Step
+
+time: 2025-02-16_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-12 18:00:00
+to 2025-02-19 18:00:00
+Ushear1 Space Mean =  0.003399767
+Ushear2 Space Mean =  0.00337134
+Change_Time_Step
+
+time: 2025-02-16_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-13 00:00:00
+to 2025-02-20 00:00:00
+Ushear1 Space Mean =  0.0033593723
+Ushear2 Space Mean =  0.003333775
+Change_Time_Step
+
+time: 2025-02-16_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-13 06:00:00
+to 2025-02-20 06:00:00
+Ushear1 Space Mean =  0.003326692
+Ushear2 Space Mean =  0.0033007625
+Change_Time_Step
+
+time: 2025-02-17_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-13 12:00:00
+to 2025-02-20 12:00:00
+Ushear1 Space Mean =  0.0033212388
+Ushear2 Space Mean =  0.003297392
+Change_Time_Step
+
+time: 2025-02-17_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-13 18:00:00
+to 2025-02-20 18:00:00
+Ushear1 Space Mean =  0.0033287806
+Ushear2 Space Mean =  0.003299249
+Change_Time_Step
+
+time: 2025-02-17_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-14 00:00:00
+to 2025-02-21 00:00:00
+Ushear1 Space Mean =  0.0033143612
+Ushear2 Space Mean =  0.0032853866
+Change_Time_Step
+
+time: 2025-02-17_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-14 06:00:00
+to 2025-02-21 06:00:00
+Ushear1 Space Mean =  0.0032985455
+Ushear2 Space Mean =  0.0032689467
+Change_Time_Step
+
+time: 2025-02-18_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-14 12:00:00
+to 2025-02-21 12:00:00
+Ushear1 Space Mean =  0.003308842
+Ushear2 Space Mean =  0.0032765078
+Change_Time_Step
+
+time: 2025-02-18_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-14 18:00:00
+to 2025-02-21 18:00:00
+Ushear1 Space Mean =  0.0033383223
+Ushear2 Space Mean =  0.0032969564
+Change_Time_Step
+
+time: 2025-02-18_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-15 00:00:00
+to 2025-02-22 00:00:00
+Ushear1 Space Mean =  0.0033654633
+Ushear2 Space Mean =  0.0033106892
+Change_Time_Step
+
+time: 2025-02-18_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-15 06:00:00
+to 2025-02-22 06:00:00
+Ushear1 Space Mean =  0.0033875818
+Ushear2 Space Mean =  0.0033232528
+Change_Time_Step
+
+time: 2025-02-19_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-15 12:00:00
+to 2025-02-22 12:00:00
+Ushear1 Space Mean =  0.003399095
+Ushear2 Space Mean =  0.0033251727
+Change_Time_Step
+
+time: 2025-02-19_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-15 18:00:00
+to 2025-02-22 18:00:00
+Ushear1 Space Mean =  0.0034149163
+Ushear2 Space Mean =  0.0033237243
+Change_Time_Step
+
+time: 2025-02-19_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-16 00:00:00
+to 2025-02-23 00:00:00
+Ushear1 Space Mean =  0.0034193923
+Ushear2 Space Mean =  0.003297887
+Change_Time_Step
+
+time: 2025-02-19_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-16 06:00:00
+to 2025-02-23 06:00:00
+Ushear1 Space Mean =  0.0034185464
+Ushear2 Space Mean =  0.0032742277
+Change_Time_Step
+
+time: 2025-02-20_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-16 12:00:00
+to 2025-02-23 12:00:00
+Ushear1 Space Mean =  0.0034022152
+Ushear2 Space Mean =  0.003239436
+Change_Time_Step
+
+time: 2025-02-20_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-16 18:00:00
+to 2025-02-23 18:00:00
+Ushear1 Space Mean =  0.003376133
+Ushear2 Space Mean =  0.0031944872
+Change_Time_Step
+
+time: 2025-02-20_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-17 00:00:00
+to 2025-02-24 00:00:00
+Ushear1 Space Mean =  0.0033094059
+Ushear2 Space Mean =  0.0031225882
+Change_Time_Step
+
+time: 2025-02-20_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-17 06:00:00
+to 2025-02-24 06:00:00
+Ushear1 Space Mean =  0.0032175053
+Ushear2 Space Mean =  0.0030349467
+Change_Time_Step
+
+time: 2025-02-21_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-17 12:00:00
+to 2025-02-24 12:00:00
+Ushear1 Space Mean =  0.003119882
+Ushear2 Space Mean =  0.0029440618
+Change_Time_Step
+
+time: 2025-02-21_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-17 18:00:00
+to 2025-02-24 18:00:00
+Ushear1 Space Mean =  0.003039237
+Ushear2 Space Mean =  0.0028708838
+Change_Time_Step
+
+time: 2025-02-21_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-18 00:00:00
+to 2025-02-25 00:00:00
+Ushear1 Space Mean =  0.0029622004
+Ushear2 Space Mean =  0.0028079883
+Change_Time_Step
+
+time: 2025-02-21_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-18 06:00:00
+to 2025-02-25 06:00:00
+Ushear1 Space Mean =  0.0029049346
+Ushear2 Space Mean =  0.002763856
+Change_Time_Step
+
+time: 2025-02-22_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-18 12:00:00
+to 2025-02-25 12:00:00
+Ushear1 Space Mean =  0.0028614958
+Ushear2 Space Mean =  0.0027280445
+Change_Time_Step
+
+time: 2025-02-22_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-18 18:00:00
+to 2025-02-25 18:00:00
+Ushear1 Space Mean =  0.0028353406
+Ushear2 Space Mean =  0.002708277
+Change_Time_Step
+
+time: 2025-02-22_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-19 00:00:00
+to 2025-02-26 00:00:00
+Ushear1 Space Mean =  0.0028282586
+Ushear2 Space Mean =  0.0027079398
+Change_Time_Step
+
+time: 2025-02-22_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-19 06:00:00
+to 2025-02-26 06:00:00
+Ushear1 Space Mean =  0.002843534
+Ushear2 Space Mean =  0.002719383
+Change_Time_Step
+
+time: 2025-02-23_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-19 12:00:00
+to 2025-02-26 12:00:00
+Ushear1 Space Mean =  0.002864048
+Ushear2 Space Mean =  0.002743788
+Change_Time_Step
+
+time: 2025-02-23_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-19 18:00:00
+to 2025-02-26 18:00:00
+Ushear1 Space Mean =  0.0028837544
+Ushear2 Space Mean =  0.0027718903
+Change_Time_Step
+
+time: 2025-02-23_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-20 00:00:00
+to 2025-02-27 00:00:00
+Ushear1 Space Mean =  0.0028921308
+Ushear2 Space Mean =  0.002797933
+Change_Time_Step
+
+time: 2025-02-23_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-20 06:00:00
+to 2025-02-27 06:00:00
+Ushear1 Space Mean =  0.002906042
+Ushear2 Space Mean =  0.0028254874
+Change_Time_Step
+
+time: 2025-02-24_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-20 12:00:00
+to 2025-02-27 12:00:00
+Ushear1 Space Mean =  0.0029337702
+Ushear2 Space Mean =  0.0028560434
+Change_Time_Step
+
+time: 2025-02-24_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-20 18:00:00
+to 2025-02-27 18:00:00
+Ushear1 Space Mean =  0.002961181
+Ushear2 Space Mean =  0.0028813886
+Change_Time_Step
+
+time: 2025-02-24_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-21 00:00:00
+to 2025-02-28 00:00:00
+Ushear1 Space Mean =  0.0029688766
+Ushear2 Space Mean =  0.002892362
+Change_Time_Step
+
+time: 2025-02-24_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-21 06:00:00
+to 2025-02-28 06:00:00
+Ushear1 Space Mean =  0.0029766916
+Ushear2 Space Mean =  0.002906777
+Change_Time_Step
+
+time: 2025-02-25_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-21 12:00:00
+to 2025-02-28 12:00:00
+Ushear1 Space Mean =  0.0030029502
+Ushear2 Space Mean =  0.0029393681
+Change_Time_Step
+
+time: 2025-02-25_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-21 18:00:00
+to 2025-02-28 18:00:00
+Ushear1 Space Mean =  0.0030240188
+Ushear2 Space Mean =  0.002970302
+Change_Time_Step
+
+time: 2025-02-25_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-22 00:00:00
+to 2025-03-01 00:00:00
+Ushear1 Space Mean =  0.0030751622
+Ushear2 Space Mean =  0.0030286554
+Change_Time_Step
+
+time: 2025-02-25_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-22 06:00:00
+to 2025-03-01 06:00:00
+Ushear1 Space Mean =  0.003148488
+Ushear2 Space Mean =  0.0031028946
+Change_Time_Step
+
+time: 2025-02-26_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-22 12:00:00
+to 2025-03-01 12:00:00
+Ushear1 Space Mean =  0.0032199107
+Ushear2 Space Mean =  0.0031731534
+Change_Time_Step
+
+time: 2025-02-26_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-22 18:00:00
+to 2025-03-01 18:00:00
+Ushear1 Space Mean =  0.0033061565
+Ushear2 Space Mean =  0.003263739
+Change_Time_Step
+
+time: 2025-02-26_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-23 00:00:00
+to 2025-03-02 00:00:00
+Ushear1 Space Mean =  0.003402188
+Ushear2 Space Mean =  0.003360431
+Change_Time_Step
+
+time: 2025-02-26_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-23 06:00:00
+to 2025-03-02 06:00:00
+Ushear1 Space Mean =  0.0034886976
+Ushear2 Space Mean =  0.0034520181
+Change_Time_Step
+
+time: 2025-02-27_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-23 12:00:00
+to 2025-03-02 12:00:00
+Ushear1 Space Mean =  0.0035564962
+Ushear2 Space Mean =  0.003523718
+Change_Time_Step
+
+time: 2025-02-27_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-23 18:00:00
+to 2025-03-02 18:00:00
+Ushear1 Space Mean =  0.0036621974
+Ushear2 Space Mean =  0.0036348451
+Change_Time_Step
+
+time: 2025-02-27_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-24 00:00:00
+to 2025-03-03 00:00:00
+Ushear1 Space Mean =  0.0037334217
+Ushear2 Space Mean =  0.0037124772
+Change_Time_Step
+
+time: 2025-02-27_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-24 06:00:00
+to 2025-03-03 06:00:00
+Ushear1 Space Mean =  0.0038045493
+Ushear2 Space Mean =  0.0037880004
+Change_Time_Step
+
+time: 2025-02-28_00:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-24 12:00:00
+to 2025-03-03 12:00:00
+Ushear1 Space Mean =  0.0038623172
+Ushear2 Space Mean =  0.0038515914
+Change_Time_Step
+
+time: 2025-02-28_06:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-24 18:00:00
+to 2025-03-03 18:00:00
+Ushear1 Space Mean =  0.003966436
+Ushear2 Space Mean =  0.0039600744
+Change_Time_Step
+
+time: 2025-02-28_12:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-25 00:00:00
+to 2025-03-04 00:00:00
+Ushear1 Space Mean =  0.0040702396
+Ushear2 Space Mean =  0.004068114
+Change_Time_Step
+
+time: 2025-02-28_18:00:00
+Caluculate_7days_Moving_Mean
+from 2025-02-25 06:00:00
+to 2025-03-04 06:00:00
+Ushear1 Space Mean =  0.0041538756
+Ushear2 Space Mean =  0.004152597
+Change_Time_Step
+
+Create /home/akioz/MyWRF/output/2025DJF/CTL/CTL_Ushear850_7dMean.nc
+Create /home/akioz/MyWRF/output/2025DJF/ME00/ME00_Ushear850_7dMean.nc
+End Program
+2248.23user 148.49system 40:06.33elapsed 99%CPU (0avgtext+0avgdata 3594164maxresident)k
+20266736inputs+94632outputs (37major+5216037minor)pagefaults 0swaps
