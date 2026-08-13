@@ -11,11 +11,13 @@ import xarray as xr
 from scipy.stats import ttest_ind
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
-lev=850
+lev=950
 
 case="2025DJF"
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
+
+map_proj="lambert"
 
 dx=25000
 dy=25000
@@ -66,6 +68,15 @@ while date <= end_date:
   v1=interplevel(va1,p1,lev)
   v_list1.append(v1)
 
+  p2=getvar(ds2,"p",units="hpa")
+  ua2=getvar(ds2,"ua",units="m/s")
+  u2=interplevel(ua2,p2,lev)
+  u_list2.append(u2)
+
+  va2=getvar(ds2,"va",units="m/s")
+  v2=interplevel(va2,p2,lev)
+  v_list2.append(v2)
+
 #水平風発散の計算
   if date == start_date:
     land1=getvar(ds1,"LANDMASK")
@@ -78,30 +89,45 @@ while date <= end_date:
     el2=getvar(ds2,"ter",units="m")
     el2=np.ma.masked_where(land2 != 1,el2)
   
-  du_dx1=u1.differentiate("west_east")/dx * rate_cos
-  dv_dy1=v1.differentiate("south_north")/dy
-  div1=du_dx1 + dv_dy1
-  div_list1.append(div1)
-
-
-
-  p2=getvar(ds2,"p",units="hpa")
-  ua2=getvar(ds2,"ua",units="m/s")
-  u2=interplevel(ua2,p2,lev)
-  u_list2.append(u2)
-
-  va2=getvar(ds2,"va",units="m/s")
-  v2=interplevel(va2,p2,lev)
-  v_list2.append(v2) 
-
-  du_dx2=u2.differentiate("west_east")/dx * rate_cos
-  dv_dy2=v2.differentiate("south_north")/dy
-  div2=du_dx2 + dv_dy2
-  div_list2.append(div2)
-
-
   ds1.close()
   ds2.close()
+
+  if map_proj == "lambert":
+##Zの変数へユークリッド距離に応じた座標を付与
+    u1 = u1.assign_coords({
+      "west_east": np.arange(u1.west_east.size) * dx,
+      "south_north": np.arange(u1.south_north.size) * dy
+    })
+
+    v1 = v1.assign_coords({
+      "west_east": np.arange(v1.west_east.size) * dx,
+      "south_north": np.arange(v1.south_north.size) * dy
+    })
+
+    du_dx1=u1.differentiate("west_east")
+    dv_dy1=v1.differentiate("south_north")
+
+    u2 = u2.assign_coords({
+      "west_east": np.arange(u2.west_east.size) * dx,
+      "south_north": np.arange(u2.south_north.size) * dy
+    })
+
+    v2 = v2.assign_coords({
+      "west_east": np.arange(v2.west_east.size) * dx,
+      "south_north": np.arange(v2.south_north.size) * dy
+    })
+
+    du_dx2=u2.differentiate("west_east")
+    dv_dy2=v2.differentiate("south_north")
+
+  elif map_proj == "mercator" :
+    du_dx2=u2.differentiate("west_east")/dx * rate_cos
+    dv_dy2=v2.differentiate("south_north")/dy
+
+  div1=du_dx1 + dv_dy1
+  div_list1.append(div1)
+  div2=du_dx2 + dv_dy2
+  div_list2.append(div2)
 
   date+=timedelta(hours=dh)
 
@@ -132,19 +158,20 @@ divdif=divmean1 - divmean2
 #ex1
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
-ax.set_extent([125,140,35,44])
+ax.set_extent([120,140,35,47])
 
-#shade=ax.contourf(
-#  lons,lats,el1,
-#  levels=np.arange(0,2000,100),
-#  cmap="pink_r",
-#  transform=ccrs.PlateCarree()
-#  )
+# shade=ax.contourf(
+#   lons,lats,el1,
+#   levels=np.arange(0,2000,100),
+#   cmap="gray",
+#   transform=ccrs.PlateCarree()
+#   )
 
 shade=ax.contourf(
   lons,lats,divmean1*div_factor,
   levels=np.arange(-2.5,3,0.5),
   cmap="bwr",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 cbar=plt.colorbar(
@@ -155,6 +182,7 @@ cbar=plt.colorbar(
 
 cbar.ax.tick_params(labelsize=12)
 
+shade2=ax.contourf(lons,lats,el1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
 step=6
 qx,qy,qk=1.1,-0.5,10
@@ -171,25 +199,30 @@ vector=ax.quiver(
 
 ax.quiverkey(vector,qx,qy,qk,f"{qk}m/s")
 
-#shade2=ax.contourf(lons,lats,el1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
-#cbar=plt.colorbar(
-#  shade,orientation="horizontal",
-#  label=f"{var_label}_[ {var_unit} ]"
-#  )
-lon_point=128
-lat_point=42
-#plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
-#ax.add_feature(cfeature.LAND,color="gray")
 ax.set_title(f"{ex1}-Wind{lev}",fontsize=20)
 
 plt.savefig(f"{fig_dir}/{ex1}/{ex1}Wind{lev}.png")
@@ -198,18 +231,12 @@ plt.close("all")
 #ex2
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
-ax.set_extent([125,140,35,44])
-
-#shade=ax.contourf(
-#  lons,lats,el2,
-#  levels=np.arange(0,2000,100),
-#  cmap="pink_r",
-#  transform=ccrs.PlateCarree()
-#  )
+ax.set_extent([120,140,35,47])
 
 shade=ax.contourf(
   lons,lats,divmean2*div_factor,
   cmap="bwr",
+  extend="both",
   levels=np.arange(-2.5,3,0.5),
   transform=ccrs.PlateCarree()
   )
@@ -218,6 +245,8 @@ cbar=plt.colorbar(
   orientation="horizontal",
   shrink=0.8,aspect=20
   )
+
+shade2=ax.contourf(lons,lats,el1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
 step=6
 qx,qy,qk=1.1,-0.5,10
@@ -235,19 +264,28 @@ vector=ax.quiver(
 ax.quiverkey(vector,qx,qy,qk,f"{qk}m/s")
 
 
-#shade2=ax.contourf(lons,lats,el2,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
-#cbar=plt.colorbar(
-#  shade,orientation="horizontal",
-#  label=f"{var_label}_[ {var_unit} ]"
-#  )
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
+
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
@@ -259,19 +297,14 @@ plt.close("all")
 #Dif
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
-ax.set_extent([125,140,35,44])
+ax.set_extent([120,140,35,47])
 
-#shade=ax.contourf(
-#  lons,lats,el1,
-#  levels=np.arange(0,2000,100),
-#  cmap="pink_r",
-#  transform=ccrs.PlateCarree()
-#  )
 
 shade=ax.contourf(
   lons,lats,divdif*div_factor,
   levels=np.arange(-2.5,3,0.5),
   cmap="bwr",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 cbar=plt.colorbar(
@@ -279,6 +312,8 @@ cbar=plt.colorbar(
   orientation="horizontal",
   shrink=0.8,aspect=20
   ) 
+
+shade2=ax.contourf(lons,lats,el1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
 step=6
 qx,qy,qk=1.1,-0.5,5
@@ -296,23 +331,27 @@ vector=ax.quiver(
 ax.quiverkey(vector,qx,qy,qk,f"{qk}m/s")
 
 
-#shade2=ax.contourf(lons,lats,el1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
-#cbar=plt.colorbar(
-#  shade,orientation="horizontal",
-#  label=f"{var_label}_[ {var_unit} ]"
-#  )
-plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
-
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
-
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 ax.coastlines()
-#ax.add_feature(cfeature.LAND,color="gray")
 ax.set_title(f"{ex1} - {ex2}-Wind{lev}",fontsize=20)
 
 plt.savefig(f"{fig_dir}/{ex2}/Dif_Wind{lev}.png")

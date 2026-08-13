@@ -1,6 +1,7 @@
+
 #!/bin/bash
 wrf_dir=/home/akioz/MyWRF
-data_dir=$wrf_dir/output/2025DJF/CTL_lamb2
+data_dir=$wrf_dir/output/latest_error
 
 if [ ! -d $data_dir ]; then
 
@@ -9,17 +10,19 @@ if [ ! -d $data_dir ]; then
 fi
 
 SDATE="2024112012"
-EDATE="2025030406"
+EDATE="2024112206"
 dh=6  
 
 cd $wrf_dir/WRF4.6.1/run
 echo cd WRFrun Directory
 
-mv wrfinput_d01 $data_dir
-mv wrfbdy_d01 $data_dir
-mv wrflowinp_d01 $data_dir
+rm met_em.d01.*:00:00.nc
+rm wrfinput_d01 
+rm wrfbdy_d01 
+rm wrflowinp_d01 
 cp rsl.out.0000 $data_dir
 cp rsl.error.0000 $data_dir
+cp namelist.input $data_dir
 
 DATE=$SDATE
 
@@ -31,13 +34,12 @@ while [ "$DATE" -le "$EDATE" ]; do
 
     echo "Processing: ${YYYY}-${MM}-${DD}_${HH}:00:00"
    
-    rm met_em.d01.${YYYY}-${MM}-${DD}_${HH}:00:00.nc
-    mv wrfout_d01_${YYYY}-${MM}-${DD}_${HH}:00:00 $data_dir
+    rm wrfout_d01_${YYYY}-${MM}-${DD}_${HH}:00:00 
     
     rst_file=wrfrst_d01_${YYYY}-${MM}-${DD}_${HH}:00:00
     if [ -f $rst_file ]; then
 
-        mv $rst_file $data_dir
+        rm $rst_file 
 
     fi
 
@@ -49,6 +51,10 @@ done
 cd $wrf_dir/WPS4.6.0
 echo cd WPS Directory
 
+cp geo_em.d01.nc $data_dir
+rm GRIBFILE*
+cp namelist.wps $data_dir
+rm met_em.d01.*:00:00.nc
 
 DATE=$SDATE
 
@@ -60,8 +66,7 @@ while [ "$DATE" -le "$EDATE" ]; do
 
     echo "Processing: ${YYYY}-${MM}-${DD}_${HH}:00:00"
 
-    rm met_em.d01.${YYYY}-${MM}-${DD}_${HH}:00:00.nc
-    
+
     DATE=$(date -d "${YYYY}-${MM}-${DD} ${HH}:00 ${dh} hour" +%Y%m%d%H)
 
 done

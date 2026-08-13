@@ -1,5 +1,6 @@
 ##ココでは移動平均した温位と西風をプロット
 from __future__ import print_function, division
+import os
 import numpy as np
 import xarray as xr
 from netCDF4 import Dataset
@@ -11,8 +12,8 @@ from datetime import datetime,timedelta
 
 case="2025DJF"
 plus=""
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
 
 cmaplev=np.arange(264,286,2)
 cmaplev_a=np.arange(-3.5,4.5,1.0)
@@ -21,7 +22,8 @@ cmaplev_a=np.arange(-3.5,4.5,1.0)
 wrf_dir="/home/akioz/MyWRF"
 wrfout_dir=f"{wrf_dir}/output/{case}"
 fig_dir=f"/home/akioz/fig/wrf/{case}"
-
+os.makedirs(f"{fig_dir}/{ex1}/vert",exist_ok=True)
+os.makedirs(f"{fig_dir}/{ex2}/vert",exist_ok=True)
 
 start_date=datetime(2024,12,1,0)
 end_date=datetime(2025,2,28,18)
@@ -169,7 +171,7 @@ ax.set_xlabel("Longitude")
 ax.set_ylabel("Height[m]")
 ax.set_ylim(0,3000)
 
-shade=ax.contourf(idx,vert,th_mean1,levels=cmaplev,cmap="bwr")
+shade=ax.contourf(idx,vert,th_mean1,levels=cmaplev,extend="both",cmap="bwr")
 cbar=plt.colorbar(shade)
 #cbar.ax.set_xlabel("K",rotation=90,labelpad=20)
 #cbar.ax.tick_params(labelsize=12)
@@ -208,7 +210,7 @@ ax.set_xticks([])
 ax.set_xlabel("Longitude")
 ax.set_ylabel("Height[m]")
 ax.set_ylim(0,3000)
-shade=ax.contourf(idx,vert,th_mean2,levels=cmaplev,cmap="bwr")
+shade=ax.contourf(idx,vert,th_mean2,levels=cmaplev,extend="both",cmap="bwr")
 plt.colorbar(shade)
 
 contour=ax.contour(idx,vert,th_mean2,levels=cmaplev,colors="black",linewidths=1.0)
@@ -243,7 +245,7 @@ ax.set_xticks([])
 ax.set_xlabel("Longitude")
 ax.set_ylabel("Height[m]")
 ax.set_ylim(0,3000)
-shade=ax.contourf(idx,vert,th_dif,levels=cmaplev_a,cmap="bwr")
+shade=ax.contourf(idx,vert,th_dif,levels=cmaplev_a,extend="both",cmap="bwr")
 plt.colorbar(shade)
     
 contour=ax.contour(idx,vert,th_dif,levels=cmaplev_a,colors="black",linewidths=1.0)

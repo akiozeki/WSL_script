@@ -1,7 +1,7 @@
 
 #!/bin/bash
 wrf_dir=/home/akioz/MyWRF
-data_dir=$wrf_dir/output/2025DJF/me
+data_dir=$wrf_dir/output/2025DJF/ME00_lamb
 
 if [ ! -d $data_dir ]; then
 

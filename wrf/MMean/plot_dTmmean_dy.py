@@ -1,10 +1,12 @@
 #from __from__ import print_function
+import os
 from datetime import datetime,timedelta
 from netCDF4 import Dataset
 from wrf import getvar,get_cartopy,latlon_coords,geo_bounds,interplevel
 import metpy.calc as mpcalc
 from metpy.units import units
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FixedLocator
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import numpy as np
@@ -23,8 +25,8 @@ nx=129
 ny=129
 sign_level=0.05
 
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
 n_member=1
 moving_day=7
 
@@ -32,6 +34,8 @@ case="2025DJF"
 wrfout_dir=f"/home/akioz/MyWRF/output/{case}"
 input_dir=f"/home/akioz/calculate/wrf/{case}/MMean"
 fig_dir=f"/home/akioz/fig/wrf/{case}"
+os.makedirs(f"{fig_dir}/{ex1}/",exist_ok=True)
+os.makedirs(f"{fig_dir}/{ex2}/",exist_ok=True)
 
 sdate=datetime(2024,12,1,0)
 edate=datetime(2025,2,28,18)
@@ -137,7 +141,7 @@ mean_T1=np.ma.masked_where(land == 1,mean_T1)
 mean_T2=np.ma.masked_where(land == 1,mean_T2)
 mean_dT_dy1=np.ma.masked_where(land == 1,mean_dT_dy1)
 mean_dT_dy2=np.ma.masked_where(land == 1,mean_dT_dy2)
-sign=np.ma.masked_where(land == 1,sign)
+#sign=np.ma.masked_where(land == 1,sign)
 
 dif_T=mean_T1 - mean_T2
 dif_dT_dy=mean_dT_dy1 - mean_dT_dy2
@@ -161,6 +165,7 @@ shade=ax.contourf(
   lons,lats,mean_dT_dy1*factor,
   levels=np.arange(-0.4,2.2,0.2),
   cmap="Spectral_r",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 
@@ -171,15 +176,28 @@ cbar=plt.colorbar(
   )
 cbar.ax.tick_params(labelsize=14)
 
-shade2=ax.contourf(lons,lats,ter,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
+#shade2=ax.contourf(lons,lats,ter,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
@@ -206,6 +224,7 @@ shade=ax.contourf(
   lons,lats,mean_dT_dy2*factor,
   levels=np.arange(-0.4,2.2,0.2),
   cmap="Spectral_r",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 
@@ -216,15 +235,28 @@ cbar=plt.colorbar(
   )
 cbar.ax.tick_params(labelsize=14)
 
-shade2=ax.contourf(lons,lats,ter2,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
+#shade2=ax.contourf(lons,lats,ter2,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
@@ -251,6 +283,7 @@ shade=ax.contourf(
   lons,lats,dif_dT_dy*factor,
   levels=np.arange(-0.85,0.95,0.1),
   cmap="bwr",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 cbar=plt.colorbar(
@@ -260,25 +293,37 @@ cbar=plt.colorbar(
   )
 cbar.ax.tick_params(labelsize=14)
 
-ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["..."],transform=ccrs.PlateCarree())
+#ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["..."],transform=ccrs.PlateCarree())
 lon_point=128
 lat_point=42
 #plt.scatter(lon_point,lat_point,marker="^",s=200,color="green",transform=ccrs.PlateCarree())
 
 shade2=ax.contourf(lons,lats,ter,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
-
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex1} - {ex2}-dT/dy{lev}",fontsize=20)
+#ax.set_title(f"{ex1} - {ex2}-dT/dy{lev}",fontsize=20)
 
 plt.savefig(f"{fig_dir}/{ex2}/DifdT_dy{lev}_{moving_day}dMean.png")
 plt.close("all")

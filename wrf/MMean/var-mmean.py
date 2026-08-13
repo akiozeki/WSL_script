@@ -13,8 +13,8 @@ from metpy.units import units
 n_ensemble=1
 
 ##変数##
-var_name="ua"
-unit="m/s"
+var_name="omega"
+unit="Pa s-1"
 #wrf-pythonの変数名と一致させる
 lev=850
 
@@ -24,7 +24,8 @@ wrf_dir="/home/akioz/MyWRF"
 wrfout_dir=f"{wrf_dir}/output/{case}"
 output_dir=f"/home/akioz/calculate/wrf/{case}/MMean"
 
-ex="ME00"
+#ex="CTL_lamb"
+ex="ME00_lamb"
 
 start_date=datetime(2024,12,1,0)
 end_date=datetime(2025,2,28,18)
@@ -33,7 +34,7 @@ print(f"Set Time : {start_date}----{end_date} dh={dh}")
 #設定した期間の前後3.5日分のデータが必要
 
 ##移動平均の設定##
-moving_day=2
+moving_day=7
 step_per_day=4
 step_all=moving_day*step_per_day
 half_step=step_all/2
@@ -92,7 +93,9 @@ while date <= end_date:
 ##変数取り出し
     p=getvar(moving_list,"p",timeidx=ALL_TIMES,method="join",units="hpa")
   
-    var_all=getvar(moving_list,var_name,timeidx=ALL_TIMES,method="join",units=unit)
+#    var_all=getvar(moving_list,var_name,timeidx=ALL_TIMES,method="join",units=unit)
+    var_all=getvar(moving_list,var_name,timeidx=ALL_TIMES,method="join")
+
 #**ココで単位付与も必ずする    
     var=interplevel(var_all,p,lev)
 
@@ -117,7 +120,8 @@ while date <= end_date:
 #変数取り出し
     cp=getvar(current_file,"p",units="hpa")
   
-    cvar_all=getvar(current_file,var_name,units=unit)
+#    cvar_all=getvar(current_file,var_name,units=unit)
+    cvar_all=getvar(current_file,var_name)
 #**ココで単位付与も必ずする    
     cvar=interplevel(cvar_all,cp,lev)
     var_a=cvar - var_mmean
@@ -129,7 +133,7 @@ while date <= end_date:
 
     current_file.close()
 ###ココで1つのアンサンブルメンバにおける移動平均した計算は終了
-    print(f"Calculate_{moving_day}Mean : N = {e_member+1}")
+    print(f"Calculate_{moving_day}dMean : N = {e_member+1}")
 
 ###ココでアンサンブル方向のforループ終了
 

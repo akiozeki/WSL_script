@@ -11,17 +11,31 @@ import numpy as np
 import xarray as xr
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
+key="Feb"
+#ここは保存ファイル名にのみ影響
+basedate=datetime(2024,12,1,0)
+sdate=datetime(2025,2,1,0)
+edate=datetime(2025,2,28,18)
+print(f"Set Time : {sdate}----{edate}")
+dh=6
+
+#指定期間を取りだす
+sidx=int((sdate - basedate).total_seconds() // (3600*dh))
+eidx=int((edate - basedate).total_seconds() // (3600*dh)) + 1
+print(sidx)
+
 var="z_m"
 #z or z_m(基本場) or z_a(擾乱)
 varlabel="m"
 factor=1
-lev=925
+lev=850
 
 dx=25000
 dy=25000
 
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
+dh=6
 n_member=1
 moving_day=7
 
@@ -33,9 +47,7 @@ wrfout_dir=f"/home/akioz/MyWRF/output/{case}"
 input_dir=f"/home/akioz/calculate/wrf/{case}/MMean"
 fig_dir=f"/home/akioz/fig/wrf/{case}"
 
-sdate=datetime(2024,12,1,0)
-edate=datetime(2025,2,28,18)
-print(f"Set Time : {sdate}----{edate}")
+
 
 ##座標系情報を得るために任意のwrfoutファイルを開く
 sy=sdate.year
@@ -65,8 +77,8 @@ ds2=xr.open_dataset(dfile2)
 print(ds1)
 print(ds2)
 
-z1=ds1[var]
-z2=ds2[var]
+z1=ds1[var].isel(time=slice(sidx,eidx))
+z2=ds2[var].isel(time=slice(sidx,eidx))
 print(z1)
 
 #dz_dy1=-np.gradient(z1,dy,axis=1)
@@ -132,7 +144,7 @@ ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")
 ax.set_title(f"{ex1}-Z{lev}",fontsize=20)
 
-plt.savefig(f"{fig_dir}/{ex1}/{ex1}_{var}{lev}_{moving_day}dMean.png")
+plt.savefig(f"{fig_dir}/{ex1}/{key}_{ex1}_{var}{lev}_{moving_day}dMean.png")
 plt.close("all")
 
 #ex2
@@ -162,7 +174,7 @@ ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")
 ax.set_title(f"{ex2}-Z{lev}",fontsize=20)
 
-plt.savefig(f"{fig_dir}/{ex2}/{ex2}_{var}{lev}_{moving_day}dMean.png")
+plt.savefig(f"{fig_dir}/{ex2}/{key}_{ex2}_{var}{lev}_{moving_day}dMean.png")
 plt.close("all")
 
 #Difference
@@ -175,6 +187,7 @@ shade=ax.contourf(
   lons,lats,dif_z*factor,
   levels=cmaplev_d,
   cmap="bwr",
+  extend="both",
   transform=ccrs.PlateCarree()
   )
 
@@ -190,19 +203,32 @@ lon_point=128
 lat_point=42
 plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")
 ax.set_title(f"{ex1} - {ex2}-Z{lev}",fontsize=20)
 
-plt.savefig(f"{fig_dir}/{ex2}/Dif_{var}{lev}_{moving_day}dMean.png")
+plt.savefig(f"{fig_dir}/{ex2}/{key}_Dif_{var}{lev}_{moving_day}dMean.png")
 plt.close("all")
 
 print("End Program")

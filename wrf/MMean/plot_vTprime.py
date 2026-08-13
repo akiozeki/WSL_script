@@ -1,4 +1,5 @@
 ###別ファイルで作ったnetCDFファイルを使って指定した期間の平均を求める
+import os
 from datetime import datetime,timedelta
 from netCDF4 import Dataset
 from wrf import getvar,get_cartopy,latlon_coords,geo_bounds,interplevel,ALL_TIMES
@@ -13,10 +14,10 @@ from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 from scipy.stats import ttest_ind
 
 
-var="vT_prime"
-#var="VV_prime"
-varlabel="[ m/s * K ]"
-#varlabel="[(m/s)^2]"
+#var="vT_prime"
+var="VV_prime"
+#varlabel="[ m/s * K ]"
+varlabel="[(m/s)^2]"
 factor=1
 
 p=850
@@ -24,13 +25,16 @@ mday=7
 key=f"{p}_{mday}dMean"
 
 case="2025DJF"
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
 
 wrf_dir="/home/akioz/MyWRF"
 wrfout_dir=f"{wrf_dir}/output/{case}"
 fig_dir=f"/home/akioz/fig/wrf/{case}"
 input_dir=f"/home/akioz/calculate/wrf/{case}/MMean"
+
+os.makedirs(f"{fig_dir}/{ex1}/zyouran",exist_ok=True)
+os.makedirs(f"{fig_dir}/{ex2}/zyouran",exist_ok=True)
 
 sign_level=0.001
 #上記のようにすると両側検定99%になる
@@ -167,6 +171,7 @@ ax.set_extent(domain)
 shade=ax.contourf(
   lons,lats,mean1*factor,
   levels=cmaplev,
+  extend="max",
   cmap=cmap,
   transform=ccrs.PlateCarree()
   )
@@ -184,13 +189,27 @@ lon_point=128
 lat_point=42
 plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+####緯度経度ラベルを表示する(ChatGPTが教えてくれた)
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")
@@ -208,6 +227,7 @@ ax.set_extent(domain)
 shade=ax.contourf(
   lons,lats,mean2*factor,
   levels=cmaplev,
+  extend="max",
   cmap=cmap,
   transform=ccrs.PlateCarree()
   )
@@ -221,13 +241,27 @@ cbar=plt.colorbar(
 
 cbar.ax.tick_params(labelsize=12)
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+####緯度経度ラベルを表示する(ChatGPTが教えてくれた)
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")
@@ -245,6 +279,7 @@ ax.set_extent(domain)
 shade=ax.contourf(
   lons,lats,dif*factor,
   levels=cmaplev_dif,
+  extend="both",
   cmap="bwr",
   transform=ccrs.PlateCarree()
   )
@@ -260,18 +295,32 @@ cbar.ax.tick_params(labelsize=14)
 #白頭山にポイント
 lon_point=128
 lat_point=42
-plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
+#plt.scatter(lon_point,lat_point,marker="^",s=400,color="black",transform=ccrs.PlateCarree())
 
 #ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
 ##有意な所にハッチ
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+####緯度経度ラベルを表示する(ChatGPTが教えてくれた)
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 ax.add_feature(cfeature.LAND,color="gray")

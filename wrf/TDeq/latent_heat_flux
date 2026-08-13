@@ -1,4 +1,4 @@
-###SST-2m気温と風速を描く　おいおい顕熱フラックスも…
+###qs - q2mと10m風速をとりあえず書く
 import math
 import sys
 from datetime import datetime,timedelta
@@ -13,8 +13,8 @@ from scipy.stats import ttest_ind
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 case="2025DJF"
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
 
 
 wrf_dir="/home/akioz/MyWRF"
@@ -27,8 +27,8 @@ end_date=datetime(2025,2,28,18)
 dh=6
 print(f"Set Time : {start_date}----{end_date}")
 
-dT_list1=[]
-dT_list2=[]
+dq_list1=[]
+dq_list2=[]
 winds_list1=[]
 winds_list2=[]
 
@@ -60,11 +60,19 @@ while date <= end_date:
 
 #変数を取り出す
   sst1=getvar(ds1,"SST")
+  slp1=getvar(ds1,"slp",units="hpa")
 #  print(sst1.values)
-  sat1=getvar(ds1,"T2")
-  dT1=sst1 - sat1
-#  print("SST - 2m Temperature",dT1)
-  dT_list1.append(dT1)
+  q1=ds1["Q2"][0,:,:]*1000
+  #kg/kg -> g/kg
+
+  #テテンの式から飽和水蒸気圧を求める
+  es1=6.112*np.exp((17.67*(sst1-273.15))/(sst1-273.15+243.5))
+
+  #海水面比湿を求める
+  qs1=1000*0.622*es1/(slp1-0.378*es1)
+
+  dq1=qs1 -q1
+  dq_list1.append(dq1)
 
   u1,v1=getvar(ds1,"uvmet10",units="m/s")
 #  print(u1)
@@ -74,11 +82,18 @@ while date <= end_date:
   winds_list1.append(winds1)
 
   sst2=getvar(ds2,"SST")
+  slp2=getvar(ds2,"slp",units="hpa")
 #  print(sst1.values)
-  sat2=getvar(ds2,"T2")
-  dT2=sst2 - sat2
-#  print("SST - 2m Temperature",dT2)
-  dT_list2.append(dT2)
+  q2=ds2["Q2"][0,:,:]*1000
+
+  #テテンの式から飽和水蒸気圧を求める
+  es2=6.112*np.exp((17.67*(sst2-273.15))/(sst2-273.15+243.5))
+
+  #海水面比湿を求める
+  qs2=1000*0.622*es2/(slp2-0.378*es2)
+
+  dq2=qs2 -q2
+  dq_list2.append(dq2)
 
   u2,v2=getvar(ds2,"uvmet10",units="m/s")
 #  print(u2)
@@ -92,8 +107,8 @@ while date <= end_date:
 #
   date+=timedelta(hours=dh)
 #
-dT_darray1=xr.concat(dT_list1,dim="time")
-dT_darray2=xr.concat(dT_list2,dim="time")
+dq_darray1=xr.concat(dq_list1,dim="time")
+dq_darray2=xr.concat(dq_list2,dim="time")
 winds_darray1=xr.concat(winds_list1,dim="time")
 winds_darray2=xr.concat(winds_list2,dim="time")
 #print(dT_darray1)
@@ -121,13 +136,13 @@ winds_darray2=xr.concat(winds_list2,dim="time")
 #print(f"{100-sign_level*100}%有意な格子点/全格子点数:{np.sum(sign)}/{sign.size}")
 
 
-dT_mean1=dT_darray1.mean(dim="time",skipna=True)
-dT_mean2=dT_darray2.mean(dim="time",skipna=True)
-dT_mean1=np.ma.masked_where(land != 0,dT_mean1)
-dT_mean2=np.ma.masked_where(land != 0,dT_mean2)
+dq_mean1=dq_darray1.mean(dim="time",skipna=True)
+dq_mean2=dq_darray2.mean(dim="time",skipna=True)
+dq_mean1=np.ma.masked_where(land != 0,dq_mean1)
+dq_mean2=np.ma.masked_where(land != 0,dq_mean2)
 
-dT_dif=dT_mean1 - dT_mean2
-dT_rate=dT_mean1/dT_mean2
+dq_dif=dq_mean1 - dq_mean2
+dq_rate=dq_mean1/dq_mean2
 
 winds_mean1=winds_darray1.mean(dim="time",skipna=True)
 winds_mean2=winds_darray2.mean(dim="time",skipna=True)
@@ -137,7 +152,7 @@ winds_mean2=np.ma.masked_where(land == 1,winds_mean2)
 winds_dif=winds_mean1 - winds_mean2
 winds_rate=winds_mean1/winds_mean2
 
-if np.nanmean(dT_dif) == 0:
+if np.nanmean(dq_dif) == 0:
   print("Missing Calculate SST - 2m Temperature ")
   sys.exit()
 
@@ -145,7 +160,7 @@ if np.nanmean(winds_dif) == 0:
   print("Missing Calculate Wind Speed")
   sys.exit()
 
-print(dT_dif)
+print(dq_dif)
 print(winds_dif)
 
 
@@ -156,9 +171,10 @@ ax=plt.axes(projection=cart_proj)
 ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,dT_mean1,
+  lons,lats,dq_mean1,
   cmap="Reds",
-  levels=np.arange(0,20,4),
+  extend="max",
+  #levels=np.arange(0,18,3),
   transform=ccrs.PlateCarree()
   )
 
@@ -176,19 +192,32 @@ ax.clabel(contour)
 
 shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex1}-Sensible Heat Flux",fontsize=20)
+ax.set_title(f"{ex1}-Qs - Q2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex1}/{ex1}_SHF.png")
+plt.savefig(f"{fig_dir}/{ex1}/{ex1}_Qs-Q2m.png")
 plt.close("all")
 
 #ex2
@@ -197,9 +226,10 @@ ax=plt.axes(projection=cart_proj)
 ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,dT_mean2,
+  lons,lats,dq_mean2,
   cmap="Reds",
-  levels=np.arange(0,20,4),
+  extend="max",
+#  levels=np.arange(0,18,3),
   transform=ccrs.PlateCarree()
   )
 
@@ -216,19 +246,32 @@ ax.clabel(contour)
 
 shade2=ax.contourf(lons,lats,ter2,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex2}-Sensible Heat Flux",fontsize=20)
+ax.set_title(f"{ex2}-Qs - Q2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex2}/{ex2}_SHF.png")
+plt.savefig(f"{fig_dir}/{ex2}/{ex2}_Qs-Q2m.png")
 plt.close("all")
 
 #Dif
@@ -237,9 +280,10 @@ ax=plt.axes(projection=cart_proj)
 ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,dT_dif,
+  lons,lats,dq_dif,
   cmap="bwr",
-  levels=np.arange(-4.5,5.5,1),
+  extend="both",
+  levels=np.arange(-0.7,0.9,0.2),
   transform=ccrs.PlateCarree()
   )
 
@@ -258,19 +302,32 @@ ax.clabel(contour)
 shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 #ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex1} - {ex2}-Sensible Heat Flux",fontsize=20)
+ax.set_title(f"{ex1} - {ex2}-Qs - Q2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex2}/Dif_SHF.png")
+plt.savefig(f"{fig_dir}/{ex2}/Dif_Qs-Q2m.png")
 plt.close("all")
 
 
@@ -280,8 +337,9 @@ ax=plt.axes(projection=cart_proj)
 ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,dT_rate,
+  lons,lats,dq_rate,
   cmap="bwr",
+  extend="both",
   levels=np.arange(0.6,1.45,0.05),
   transform=ccrs.PlateCarree()
   )
@@ -301,19 +359,32 @@ ax.clabel(contour)
 shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 #ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
 
-gl = ax.gridlines(draw_labels=True)
-gl.xformatter = LONGITUDE_FORMATTER
-gl.yformatter = LATITUDE_FORMATTER
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
 gl.top_labels = False
 gl.right_labels = False
-gl.xlines=False
-gl.ylines=False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
 
 ax.coastlines()
 #ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex1} / {ex2}-Sensible Heat Flux",fontsize=20)
+ax.set_title(f"{ex1} / {ex2}-Qs - Q2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex2}/Rate_SHF.png")
+plt.savefig(f"{fig_dir}/{ex2}/Rate_Qs-Q2m.png")
 plt.close("all")
 
 

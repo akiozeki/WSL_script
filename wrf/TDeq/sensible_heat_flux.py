@@ -1,8 +1,9 @@
+###SST-2m気温とqs - q2mと10m風速をとりあえず書く
+import math
+import sys
 from datetime import datetime,timedelta
 from netCDF4 import Dataset
-from wrf import getvar,get_cartopy,latlon_coords,geo_bounds,interplevel
-import metpy.calc as mpcalc
-from metpy.units import units
+from wrf import getvar,get_cartopy,latlon_coords
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -11,19 +12,10 @@ import xarray as xr
 from scipy.stats import ttest_ind
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
-var="z"
-lev=850
-var_unit="m"
-
-var_label="Z850"
 case="2025DJF"
 ex1="CTL_lamb"
 ex2="ME00_lamb"
 
-cmaplev=np.arange(5120,5920,180)
-#cmaplev=np.arange(7120,7920,80)
-#cmaplev_dif=np.arange(-6,7.5,1.5)
-cmaplev_dif=np.arange(-18,22,4)
 
 wrf_dir="/home/akioz/MyWRF"
 wrfout_dir=f"{wrf_dir}/output/{case}"
@@ -35,8 +27,10 @@ end_date=datetime(2025,2,28,18)
 dh=6
 print(f"Set Time : {start_date}----{end_date}")
 
-var_list1=[]
-var_list2=[]
+dT_list1=[]
+dT_list2=[]
+winds_list1=[]
+winds_list2=[]
 
 date=start_date
 
@@ -55,77 +49,133 @@ while date <= end_date:
   ds1=Dataset(wrfout1)
   ds2=Dataset(wrfout2)
 
-  if date == end_date :
-    ter=getvar(ds1,"ter")
-    land=getvar(ds1,"LANDMASK")
+  if date == end_date:
+    land=getvar(ds1,"LANDMASK") 
     cart_proj=get_cartopy(land)
-    print("projection:",cart_proj)
     lats,lons=latlon_coords(land)
-    
+    ter1=getvar(ds1,"ter",units="m")
+    ter1=np.ma.masked_where(land != 1,ter1)
+    ter2=getvar(ds2,"ter",units="m")
+    ter2=np.ma.masked_where(land != 1,ter2)
 
-#変数取り出す
-  p1=getvar(ds1,"p",units="hpa")
-  var1=getvar(ds1,var,units=var_unit)
-  pvar1=interplevel(var1,p1,lev)
-  var_list1.append(pvar1)
+#変数を取り出す
+  sst1=getvar(ds1,"SST")
+#  print(sst1.values)
+  sat1=getvar(ds1,"T2")
+  dT1=sst1 - sat1
+#  print("SST - 2m Temperature",dT1)
+  dT_list1.append(dT1)
 
-  p2=getvar(ds2,"p",units="hpa")
-  var2=getvar(ds2,var,units=var_unit)
-  pvar2=interplevel(var2,p2,lev)
-  var_list2.append(pvar2)
+  u1,v1=getvar(ds1,"uvmet10",units="m/s")
+#  print(u1)
+#  print(v1)
+  winds1=np.sqrt(u1**2 + v1**2)
+#  print("Wind Speed",winds1)
+  winds_list1.append(winds1)
+
+  sst2=getvar(ds2,"SST")
+#  print(sst1.values)
+  sat2=getvar(ds2,"T2")
+  dT2=sst2 - sat2
+#  print("SST - 2m Temperature",dT2)
+  dT_list2.append(dT2)
+
+  u2,v2=getvar(ds2,"uvmet10",units="m/s")
+#  print(u2)
+#  print(v2)
+  winds2=np.sqrt(u2**2 + v2**2)
+#  print("Wind Speed",winds2)
+  winds_list2.append(winds2)
 
   ds1.close()
   ds2.close()
-
+#
   date+=timedelta(hours=dh)
+#
+dT_darray1=xr.concat(dT_list1,dim="time")
+dT_darray2=xr.concat(dT_list2,dim="time")
+winds_darray1=xr.concat(winds_list1,dim="time")
+winds_darray2=xr.concat(winds_list2,dim="time")
+#print(dT_darray1)
+#print(winds_darray1)
 
-darray1=xr.concat(var_list1,dim="time")
-darray2=xr.concat(var_list2,dim="time")
-
-##ココで母平均の差の検定
-ny=129
-nx=129
-sign_level=0.1
-
-sign=np.zeros((ny,nx))
-p_value=np.zeros((ny,nx))
-t_value=np.zeros((ny,nx))
-
-for j in range(ny):
-  for i in range(nx):
-    sample1=darray1.values[:,j,i]
-    sample2=darray2.values[:,j,i]
-    t_value[j,i],p_value[j,i]=ttest_ind(sample1,sample2,equal_var=False)
-    sign_tf=(p_value[j,i] < sign_level)
-    sign[j,i]=sign_tf.astype(int)
-
-print(p_value)
-print(f"{100-sign_level*100}%有意な格子点/全格子点数:{np.sum(sign)}/{sign.size}")
+#
+###ココで母平均の差の検定
+#ny=129
+#nx=129
+#sign_level=0.1
+#
+#sign=np.zeros((ny,nx))
+#p_value=np.zeros((ny,nx))
+#t_value=np.zeros((ny,nx))
+#
+#for j in range(ny):
+#  for i in range(nx):
+#    sample1=darray1.values[:,j,i]
+#    sample2=darray2.values[:,j,i]
+#    t_value[j,i],p_value[j,i]=ttest_ind(sample1,sample2,equal_var=False)
+#    sign_tf=(p_value[j,i] < sign_level)
+#    sign[j,i]=sign_tf.astype(int)
+#
+#print(p_value)
+#print(f"{100-sign_level*100}%有意な格子点/全格子点数:{np.sum(sign)}/{sign.size}")
 
 
-mean1=darray1.mean(dim="time",skipna=True)
-mean2=darray2.mean(dim="time",skipna=True)
-dif=mean1 - mean2
+dT_mean1=dT_darray1.mean(dim="time",skipna=True)
+dT_mean2=dT_darray2.mean(dim="time",skipna=True)
+dT_mean1=np.ma.masked_where(land != 0,dT_mean1)
+dT_mean2=np.ma.masked_where(land != 0,dT_mean2)
 
-#print(mean1)
-#print(mean2)
+dT_dif=dT_mean1 - dT_mean2
+dT_rate=dT_mean1/dT_mean2
+
+winds_mean1=winds_darray1.mean(dim="time",skipna=True)
+winds_mean2=winds_darray2.mean(dim="time",skipna=True)
+winds_mean1=np.ma.masked_where(land == 1,winds_mean1)
+winds_mean2=np.ma.masked_where(land == 1,winds_mean2)
+
+winds_dif=winds_mean1 - winds_mean2
+winds_rate=winds_mean1/winds_mean2
+
+if np.nanmean(dT_dif) == 0:
+  print("Missing Calculate SST - 2m Temperature ")
+  sys.exit()
+
+if np.nanmean(winds_dif) == 0:
+  print("Missing Calculate Wind Speed")
+  sys.exit()
+
+print(dT_dif)
+print(winds_dif)
+
 
 ##Plot
 #ex1
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
+ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,mean1,
-  cmap="viridis",
-#  levels=cmaplev,
+  lons,lats,dT_mean1,
+  cmap="Reds",
+  extend="max",
+  levels=np.arange(0,20,4),
   transform=ccrs.PlateCarree()
   )
 
 cbar=plt.colorbar(
-  shade,orientation="horizontal",
-  label=f"{var_label}_[ {var_unit} ]"
+  shade,orientation="vertical"
   )
+
+contour=ax.contour(
+  lons,lats,winds_mean1,
+  levels=np.arange(10,34,4),
+  colors="black",linewidths=1.5,
+  transform=ccrs.PlateCarree()
+  )
+ax.clabel(contour)
+
+shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
 # グリッド線の設定
 gl = ax.gridlines(draw_labels=True, 
@@ -149,27 +199,37 @@ gl.xlabel_style = {'rotation': 0}
 gl.xpadding = 10
 
 ax.coastlines()
-ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex1}-{var_label}",fontsize=20)
+#ax.add_feature(cfeature.LAND,color="gray")
+ax.set_title(f"{ex1}-SST-T2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex1}/{ex1}{var_label}.png")
+plt.savefig(f"{fig_dir}/{ex1}/{ex1}_SST-T2m.png")
 plt.close("all")
 
 #ex2
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
+ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,mean2,
-  cmap="viridis",
-#  levels=cmaplev,
+  lons,lats,dT_mean2,
+  cmap="Reds",
+  extend="max",
+  levels=np.arange(0,20,4),
   transform=ccrs.PlateCarree()
   )
 
 cbar=plt.colorbar(
-  shade,orientation="horizontal",
-  label=f"{var_label}_[ {var_unit} ]"
+  shade,orientation="vertical"
   )
+contour=ax.contour(
+  lons,lats,winds_mean2,
+  levels=np.arange(10,34,4),
+  colors="black",linewidths=1.5,
+  transform=ccrs.PlateCarree()
+  )
+ax.clabel(contour)
+
+shade2=ax.contourf(lons,lats,ter2,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
 
 # グリッド線の設定
 gl = ax.gridlines(draw_labels=True, 
@@ -193,98 +253,39 @@ gl.xlabel_style = {'rotation': 0}
 gl.xpadding = 10
 
 ax.coastlines()
-ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"{ex2}-{var_label}",fontsize=20)
+#ax.add_feature(cfeature.LAND,color="gray")
+ax.set_title(f"{ex2}-SST-T2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex2}/{ex2}{var_label}.png")
+plt.savefig(f"{fig_dir}/{ex2}/{ex2}_SST-T2m.png")
 plt.close("all")
 
 #Dif
 fig=plt.figure()
 ax=plt.axes(projection=cart_proj)
-
-ax.contourf(
-      lons,lats,ter,
-      cmap="Greys",
-      extend="max",
-      levels=np.arange(0,2000,100),
-      transform=ccrs.PlateCarree()
-    )
-
-# shade=ax.contourf(
-#   lons,lats,dif,
-#   cmap="bwr",
-#   levels=cmaplev_dif,
-#   extend="both",
-#   transform=ccrs.PlateCarree()
-#   )
-
-# cbar=plt.colorbar(
-#   shade,orientation="vertical",
-#   label=f"{var_label}_[ {var_unit} ]"
-#   )
-
-contour=ax.contour(
-  lons,lats,dif,
-  colors="black",
-  levels=cmaplev_dif,linewidths=1.0,
-  transform=ccrs.PlateCarree()
-  )
-
-ax.clabel(contour)
-
-#ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
-# ax.plot(
-#       [120,135],
-#       [50,30],
-#       color="green",
-#       linewidth=1,
-#       transform=ccrs.PlateCarree()
-#     )
-# グリッド線の設定
-gl = ax.gridlines(draw_labels=True, 
-                  linewidth=1, 
-                  color='gray', 
-                  alpha=0.5, 
-                  linestyle='--')
-# ラベルの表示位置を制御
-gl.xlines = True         # 経度線を描く
-gl.ylines = True         # 緯度線を描く
-#gl.xformatter = LONGITUDE_FORMATTER
-#gl.yformatter = LATITUDE_FORMATTER
-gl.top_labels = False
-gl.right_labels = False
-#gl.xlocator=FixedLocator([127,130,133,136,139])
-#gl.ylocator=FixedLocator()
-gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
-gl.y_inline = False      # 緯度も念のため設定
-gl.ylabel_style = {'rotation': 0}
-gl.xlabel_style = {'rotation': 0}
-gl.xpadding = 10
-
-ax.coastlines()
-ax.add_feature(cfeature.LAND,color="gray")
-
-#ax.set_title(f"{ex1} - {ex2}-{var_label}",fontsize=20)
-
-plt.savefig(f"{fig_dir}/{ex2}/Dif{var_label}.png")
-plt.close("all")
-
-
-#p値
-fig=plt.figure()
-ax=plt.axes(projection=cart_proj)
+ax.set_extent([125,140,35,44])
 
 shade=ax.contourf(
-  lons,lats,p_value,
-  cmap="Reds",
+  lons,lats,dT_dif,
+  cmap="bwr",
+  extend="both",
+  levels=np.arange(-4.5,5.5,1),
   transform=ccrs.PlateCarree()
   )
 
 cbar=plt.colorbar(
-  shade,orientation="horizontal",
-  label=f"{var_label}_[ {var_unit} ]"
+  shade,orientation="vertical"
   )
+
+contour=ax.contour(
+  lons,lats,winds_dif,
+  levels=np.arange(-2.5,3.5,1),
+  colors="black",linewidths=1.5,
+  transform=ccrs.PlateCarree()
+  )
+ax.clabel(contour)
+
+shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
+#ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
 
 # グリッド線の設定
 gl = ax.gridlines(draw_labels=True, 
@@ -308,12 +309,68 @@ gl.xlabel_style = {'rotation': 0}
 gl.xpadding = 10
 
 ax.coastlines()
-ax.add_feature(cfeature.LAND,color="gray")
-ax.set_title(f"P-value{100-sign_level*100}%",fontsize=20)
+#ax.add_feature(cfeature.LAND,color="gray")
+ax.set_title(f"{ex1} - {ex2}-SST-T2m",fontsize=14)
 
-plt.savefig(f"{fig_dir}/{ex2}/P-value{100-sign_level*100}%{var_label}.png")
+plt.savefig(f"{fig_dir}/{ex2}/Dif_SST-T2m.png")
 plt.close("all")
 
+
+#Rate
+fig=plt.figure()
+ax=plt.axes(projection=cart_proj)
+ax.set_extent([125,140,35,44])
+
+shade=ax.contourf(
+  lons,lats,dT_rate,
+  cmap="bwr",
+  extend="both",
+  levels=np.arange(0.6,1.45,0.05),
+  transform=ccrs.PlateCarree()
+  )
+
+cbar=plt.colorbar(
+  shade,orientation="vertical"
+  )
+
+contour=ax.contour(
+  lons,lats,winds_rate,
+  levels=np.arange(0.4,1.8,0.1),
+  colors="black",linewidths=1.5,
+  transform=ccrs.PlateCarree()
+  )
+ax.clabel(contour)
+
+shade2=ax.contourf(lons,lats,ter1,levels=np.arange(0,2000,100),cmap="Greys",transform=ccrs.PlateCarree())
+#ax.contourf(lons,lats,sign,levels=[0.5,1.5],colors="none",hatches=["///"],transform=ccrs.PlateCarree())
+
+# グリッド線の設定
+gl = ax.gridlines(draw_labels=True, 
+                  linewidth=1, 
+                  color='gray', 
+                  alpha=0.5, 
+                  linestyle='--')
+# ラベルの表示位置を制御
+gl.xlines = True         # 経度線を描く
+gl.ylines = True         # 緯度線を描く
+#gl.xformatter = LONGITUDE_FORMATTER
+#gl.yformatter = LATITUDE_FORMATTER
+gl.top_labels = False
+gl.right_labels = False
+#gl.xlocator=FixedLocator([127,130,133,136,139])
+#gl.ylocator=FixedLocator()
+gl.x_inline = False      # ラベルを図の内側（インライン）に書かない設定
+gl.y_inline = False      # 緯度も念のため設定
+gl.ylabel_style = {'rotation': 0}
+gl.xlabel_style = {'rotation': 0}
+gl.xpadding = 10
+
+ax.coastlines()
+#ax.add_feature(cfeature.LAND,color="gray")
+ax.set_title(f"{ex1} / {ex2}-SST-T2m",fontsize=14)
+
+plt.savefig(f"{fig_dir}/{ex2}/Rate_SST-T2m.png")
+plt.close("all")
 
 
 print("End Program")

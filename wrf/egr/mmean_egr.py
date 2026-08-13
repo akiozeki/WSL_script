@@ -8,13 +8,13 @@ import xarray as xr
 
 
 #######################
-var="Ushear"
+var="EGR"
 #EGR or N or Ushear
 
 #ファイルパスと時間###
 case="2025DJF"
-ex1="CTL"
-ex2="ME00"
+ex1="CTL_lamb"
+ex2="ME00_lamb"
 wrf_dir="/home/akioz/MyWRF"
 wrfout_dir=f"{wrf_dir}/output/{case}"
 output_dir=f"/home/akioz/calculate/wrf/{case}/EGR"
@@ -33,9 +33,9 @@ step_all=moving_day*step_per_day
 half_step=step_all / 2
 
 
-p=500
-p_t=450
-p_w=550
+p=850
+p_t=800
+p_w=900
 #######################
 
 
